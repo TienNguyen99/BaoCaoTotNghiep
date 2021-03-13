@@ -15,5 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/','HomeController@index');
 
-Route::get('trang-chu','HomeController@index');
+Route::get('/trang-chu','HomeController@index');
+
+
+Route::get('/detail/{filid}','DetailController@detail_film');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
+
 

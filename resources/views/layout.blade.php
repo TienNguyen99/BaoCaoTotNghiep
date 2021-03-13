@@ -19,14 +19,14 @@
     rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="{{'public/frontend/css/bootstrap.min.css'}}" type="text/css">
-    <link rel="stylesheet" href="{{'public/frontend/css/font-awesome.min.css'}}" type="text/css">
-    <link rel="stylesheet" href="{{'public/frontend/css/elegant-icons.css'}}" type="text/css">
-    <link rel="stylesheet" href="{{'public/frontend/css/plyr.css'}}" type="text/css">
-    <link rel="stylesheet" href="{{'public/frontend/css/nice-select.css'}}" type="text/css">
-    <link rel="stylesheet" href="{{'public/frontend/css/owl.carousel.min.css'}}" type="text/css">
-    <link rel="stylesheet" href="{{'public/frontend/css/slicknav.min.css'}}" type="text/css">
-    <link rel="stylesheet" href="{{'public/frontend/css/style.css'}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/bootstrap.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/font-awesome.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/elegant-icons.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/plyr.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/nice-select.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/owl.carousel.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/slicknav.min.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}" type="text/css">
 </head>
 
 <body>
@@ -42,7 +42,7 @@
                 <div class="col-lg-2">
                     <div class="header__logo">
                         <a href="./index.html">
-                            <img src="img/logo.png" alt="">
+                            <img src="{{'img/logo.png'}}" alt="">
                         </a>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="./index.html">Mua vé</a></li>
+                                <li class="active"><a href="./trang-chu">Mua vé</a></li>
                                 <li><a href="./categories.html">Điện ảnh <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="./categories.html">Thể loại</a></li>
@@ -79,15 +79,15 @@
     <!-- Header End -->
 
     <!-- Hero Section Begin -->
-   
-        <section class="hero">
+
+    <section class="hero">
         <div class="container">
-                    <div class="hero__slider owl-carousel">
-                <div class="hero__items set-bg" data-setbg="{{'public/frontend/img/slider.jpg'}}">
+            <div class="hero__slider owl-carousel">
+                <div class="hero__items set-bg" data-setbg="{{asset('public/frontend/img/slider.jpg')}}">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
-                                
+
                                 <h2>Fate / Stay Night: Unlimited Blade Works</h2>
                                 <p>After 30 days of travel across the world...</p>
                                 <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
@@ -95,11 +95,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__items set-bg" data-setbg="{{'public/frontend/img/slider2.png'}}">
+                <div class="hero__items set-bg" data-setbg="{{asset('public/frontend/img/slider2.png')}}">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
-                                
+
                                 <h2>Fate / Stay Night: Unlimited Blade Works</h2>
                                 <p>After 30 days of travel across the world...</p>
                                 <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
@@ -107,11 +107,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="hero__items set-bg" data-setbg="{{'public/frontend/img/slider3.jpg'}}">
+                <div class="hero__items set-bg" data-setbg="{{asset('public/frontend/img/slider3.jpg')}}">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
-                                
+
                                 <h2>Fate / Stay Night: Unlimited Blade Works</h2>
                                 <p>After 30 days of travel across the world...</p>
                                 <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
@@ -131,7 +131,7 @@
                 <div class="col-lg-8">
 
 
-                @yield('content')
+                    @yield('content')
 
 
 
@@ -148,96 +148,111 @@
                                 <li data-filter=".month">Tháng</li>
                                 <li data-filter=".years">Năm</li>
                             </ul>
-                            <div class="filter__gallery">
-                                <div class="product__sidebar__view__item set-bg mix day years"
-                                data-setbg="img/sidebar/tv-1.jpg">
+                            <?php foreach ($Phims as $key => $phim): ?>
+                                <div class="filter__gallery">
+                                    <div class="product__sidebar__view__item set-bg mix day years"
+                                    data-setbg="img/sidebar/tv-1.jpg">
+                                    <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="300px" width="100%">
+
+                                    <div class="ep">18 / ?</div>
+                                    <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
+                                    <h5><a href="#">{{$phim->namef}}</a></h5>
+                                </div>
+                            <?php endforeach ?>
+                            <?php foreach ($Phims as $key => $phim): ?>
+                                <div class="product__sidebar__view__item set-bg mix month week"
+                                data-setbg="img/sidebar/tv-2.jpg">
                                 <div class="ep">18 / ?</div>
                                 <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">Boruto: Naruto next generations</a></h5>
+                                <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
                             </div>
-                            <div class="product__sidebar__view__item set-bg mix month week"
-                            data-setbg="img/sidebar/tv-2.jpg">
-                            <div class="ep">18 / ?</div>
-                            <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                        </div>
-                        <div class="product__sidebar__view__item set-bg mix week years"
-                        data-setbg="img/sidebar/tv-3.jpg">
-                        <div class="ep">18 / ?</div>
-                        <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                        <h5><a href="#">Sword art online alicization war of underworld</a></h5>
-                    </div>
-                    <div class="product__sidebar__view__item set-bg mix years month"
-                    data-setbg="img/sidebar/tv-4.jpg">
-                    <div class="ep">18 / ?</div>
-                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                    <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
-                </div>
-                <div class="product__sidebar__view__item set-bg mix day"
-                data-setbg="img/sidebar/tv-5.jpg">
-                <div class="ep">18 / ?</div>
-                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                <h5><a href="#">Fate stay night unlimited blade works</a></h5>
-            </div>
+                        <?php endforeach ?>
+                        <?php foreach ($Phims as $key => $phim): ?>
+                          <div class="product__sidebar__view__item set-bg mix week years"
+                          data-setbg="img/sidebar/tv-3.jpg">
+                          <div class="ep">18 / ?</div>
+                          <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                          <h5><a href="#">Sword art online alicization war of underworld</a></h5>
+                      </div>  
+                  <?php endforeach ?>
+                  <?php foreach ($Phims as $key => $phim): ?>
+                  <div class="product__sidebar__view__item set-bg mix years month"
+                  data-setbg="img/sidebar/tv-4.jpg">
+                  <div class="ep">18 / ?</div>
+                  <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                  <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
+              </div>   
+          <?php endforeach ?>
+          <?php foreach ($phimngays as $key => $phimngay): ?>
+          <div class="product__sidebar__view__item set-bg mix day"
+          data-setbg="img/sidebar/tv-5.jpg">
+          <div class="ep">18 / ?</div>
+          <div class="view"><i class="fa fa-eye"></i> 9141</div>
+          <h5><a href="#">{{$phimngay -> namef}}</a></h5>
+      </div>  
+  <?php endforeach ?> 
+
+</div>
+
+
+</div>
+<div class="product__sidebar__comment">
+    <div class="section-title">
+        <h5>Bình Luận mới nhất</h5>
+    </div>
+    <div class="product__sidebar__comment__item">
+        <div class="product__sidebar__comment__item__pic">
+            <img src="img/sidebar/comment-1.jpg" alt="">
+        </div>
+        <div class="product__sidebar__comment__item__text">
+            <ul>
+                <li>Active</li>
+                <li>Movie</li>
+            </ul>
+            <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+            <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
         </div>
     </div>
-    <div class="product__sidebar__comment">
-        <div class="section-title">
-            <h5>Bình Luận mới nhất</h5>
+    <div class="product__sidebar__comment__item">
+        <div class="product__sidebar__comment__item__pic">
+            <img src="img/sidebar/comment-2.jpg" alt="">
         </div>
-        <div class="product__sidebar__comment__item">
-            <div class="product__sidebar__comment__item__pic">
-                <img src="img/sidebar/comment-1.jpg" alt="">
-            </div>
-            <div class="product__sidebar__comment__item__text">
-                <ul>
-                    <li>Active</li>
-                    <li>Movie</li>
-                </ul>
-                <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-            </div>
-        </div>
-        <div class="product__sidebar__comment__item">
-            <div class="product__sidebar__comment__item__pic">
-                <img src="img/sidebar/comment-2.jpg" alt="">
-            </div>
-            <div class="product__sidebar__comment__item__text">
-                <ul>
-                    <li>Active</li>
-                    <li>Movie</li>
-                </ul>
-                <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
-                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-            </div>
-        </div>
-        <div class="product__sidebar__comment__item">
-            <div class="product__sidebar__comment__item__pic">
-                <img src="img/sidebar/comment-3.jpg" alt="">
-            </div>
-            <div class="product__sidebar__comment__item__text">
-                <ul>
-                    <li>Active</li>
-                    <li>Movie</li>
-                </ul>
-                <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
-                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-            </div>
-        </div>
-        <div class="product__sidebar__comment__item">
-            <div class="product__sidebar__comment__item__pic">
-                <img src="img/sidebar/comment-4.jpg" alt="">
-            </div>
-            <div class="product__sidebar__comment__item__text">
-                <ul>
-                    <li>Active</li>
-                    <li>Movie</li>
-                </ul>
-                <h5><a href="#">Monogatari Series: Second Season</a></h5>
-                <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-            </div>
+        <div class="product__sidebar__comment__item__text">
+            <ul>
+                <li>Active</li>
+                <li>Movie</li>
+            </ul>
+            <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
+            <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
         </div>
     </div>
+    <div class="product__sidebar__comment__item">
+        <div class="product__sidebar__comment__item__pic">
+            <img src="img/sidebar/comment-3.jpg" alt="">
+        </div>
+        <div class="product__sidebar__comment__item__text">
+            <ul>
+                <li>Active</li>
+                <li>Movie</li>
+            </ul>
+            <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
+            <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+        </div>
+    </div>
+    <div class="product__sidebar__comment__item">
+        <div class="product__sidebar__comment__item__pic">
+            <img src="img/sidebar/comment-4.jpg" alt="">
+        </div>
+        <div class="product__sidebar__comment__item__text">
+            <ul>
+                <li>Active</li>
+                <li>Movie</li>
+            </ul>
+            <h5><a href="#">Monogatari Series: Second Season</a></h5>
+            <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+        </div>
+    </div>
+</div>
 </div>
 </div>
 </div>
@@ -290,14 +305,14 @@
 <!-- Search model end -->
 
 <!-- Js Plugins -->
-<script src="{{'public/frontend/js/jquery-3.3.1.min.js'}}"></script>
-<script src="{{'public/frontend/js/bootstrap.min.js'}}"></script>
-<script src="{{'public/frontend/js/player.js'}}"></script>
-<script src="{{'public/frontend/js/jquery.nice-select.min.js'}}"></script>
-<script src="{{'public/frontend/js/mixitup.min.js'}}"></script>
-<script src="{{'public/frontend/js/jquery.slicknav.js'}}"></script>
-<script src="{{'public/frontend/js/owl.carousel.min.js'}}"></script>
-<script src="{{'public/frontend/js/main.js'}}"></script>
+<script src="{{asset('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/player.js')}}"></script>
+<script src="{{asset('public/frontend/js/jquery.nice-select.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/mixitup.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/jquery.slicknav.js')}}"></script>
+<script src="{{asset('public/frontend/js/owl.carousel.min.js')}}"></script>
+<script src="{{asset('public/frontend/js/main.js')}}"></script>
 
 
 </body>
