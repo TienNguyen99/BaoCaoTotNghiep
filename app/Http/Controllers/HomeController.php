@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Film;
 use DB;
 use Carbon\Carbon;
+use App\Customer;
+use Hash;
 class HomeController extends Controller
 {
     public function index()
@@ -52,7 +54,39 @@ class HomeController extends Controller
         // $film = new Film;
 
 
+        //Dang nhap
+
+        //Dang ky
+
+
     	return view('pages.home')->with(compact("Phims"))->with(compact('phimngays'))->with(compact('comment'))->with(compact('sliders'));
     }
-       
+
+        public function postDangky(Request $req){
+            $this ->validate($req,
+
+                ['email' => 'required|email|unique:customer,customer_email' ,
+                 'password' =>'required|min:6|max:20',
+                 'fullname'=>'required',
+                 're_password'=>'required|same:password'
+                   ],[
+                   'email.required'=>'Vui lòng nhập email',
+                   'email.email'=>'Không đúng định dạng mail',
+                   'email.unique'=>'Email đã có người dùng.',
+                   'password.required'=>'Vui lòng nhập mật khẩu',
+                   're_password.same'=>'Mật khẩu không trùng khớp',
+                   'password.min'=>'Mật khẩu ít nhất 6 ký tự'
+                      ]
+
+            );
+            $customer = new Customer();
+            $customer ->customer_name = $req->fullname;
+            $customer ->customer_email = $req ->email;
+            $customer ->customer_password = Hash::make($req ->password);
+            $customer ->customer_phone = $req ->phone;
+            $customer ->customer_address = $req ->address;
+            $customer ->customer_birth = $req ->birth;
+            $customer ->save();
+            return redirect()->back()->with('thanhcong','Tạo tài khoản thành công.');
+        }      
 }

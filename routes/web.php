@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/','HomeController@index');
 
 Route::get('/trang-chu','HomeController@index');
-
+//Dang ky post
+Route::post('/trang-chu','HomeController@postDangky');
 
 Route::get('/detail/{filid}','DetailController@detail_film');
 

@@ -10,7 +10,7 @@
     <meta name="keywords" content="Anime, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" href="{{'public/frontend/img/icon.ico'}}" type="image/icon type">
+    <link rel="icon" href="{{asset('public/frontend/img/icon.ico')}}" type="image/icon type">
     <title>Binh An Cinema</title>
 
     <!-- Google Font -->
@@ -322,7 +322,7 @@
                                 <div class="form loginBox">
                                     <form method="" action="" accept-charset="UTF-8">
                                     <input id="email" class="form-control" type="text" placeholder="Email" name="email">
-                                    <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                                    <input id="password" class="form-control" type="password" placeholder="Mật khẩu" name="password">
                                     <input class="btn btn-default btn-login" type="button" value="Đăng nhập" >
                                     </form>
                                 </div>
@@ -331,11 +331,29 @@
                         <div class="box">
                             <div class="content registerBox" style="display:none;">
                              <div class="form">
-                                <form method="" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8">
+                                <form method="post" html="{:multipart=>true}" data-remote="true" action="{{ action('HomeController@postDangky')}}" accept-charset="UTF-8">
+                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                                    <?php if (count($errors)>0): ?>
+                                        <div class="alert alert-danger">
+                                            <?php foreach ($errors->all() as $err): ?>
+                                                {{$err}}
+                                            <?php endforeach ?>
+
+
+                                        </div>
+                                    <?php endif ?>
+                                <?php if (Session::has('thanhcong')): ?>
+                                    <div class="alert alert-success">{{Session::get('thanhcong')}}</div>
+                                <?php endif ?>
                                 <input id="email" class="form-control" type="text" placeholder="Email" name="email">
-                                <input id="password" class="form-control" type="password" placeholder="Password" name="password">
-                                <input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
-                                <input class="btn btn-default btn-register" type="button" value="Đăng ký" name="commit">
+                                <input id="password" class="form-control" type="password" placeholder="Mật khẩu" name="password">
+                                <input id="password_confirmation" class="form-control" type="password" placeholder="Nhập lại mật khẩu" name="re_password">
+                                <input type="text" class="form-control" name="phone" placeholder="Số điện thoại">
+                                <input type="text" class="form-control" name="fullname" placeholder="Họ và tên">
+
+                                <input type="date" class="form-control" name="birth">
+                                <input type="text" class="form-control" name="address" placeholder="Địa chỉ">
+                                <input class="btn btn-default btn-register" type="submit" value="Đăng ký" name="commit">
                                 </form>
                                 </div>
                             </div>
