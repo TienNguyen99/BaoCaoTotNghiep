@@ -18,8 +18,11 @@ class HomeController extends Controller
         ->get();
 
         
-
-
+        //Slider
+        $sliders = db::table('slider')
+        ->where('slider_status','1')
+        ->get();
+        //Phim ngay
         $phimngays = db::table('film')
         ->where('status','1')
 
@@ -49,7 +52,7 @@ class HomeController extends Controller
         // $film = new Film;
 
 
-    	return view('pages.home')->with(compact("Phims"))->with(compact('phimngays'))->with(compact('comment'));
+    	return view('pages.home')->with(compact("Phims"))->with(compact('phimngays'))->with(compact('comment'))->with(compact('sliders'));
     }
        
 }

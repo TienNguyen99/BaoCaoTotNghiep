@@ -14,6 +14,10 @@ class DetailController extends Controller
 		->where('film.status','1')
 		->get();
 
+		$sliders = db::table('slider')
+        ->where('slider_status','1')
+        ->get();
+
 		$phimngays = db::table('film')
 		->where('status','1')
 		->get();
@@ -22,7 +26,7 @@ class DetailController extends Controller
 		->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
 		->join('Feedback', 'film.film_feedid','=','Feedback.feedid')
 		->where('film.filid',$filid)->get();
-		return view('pages.detail')->with(compact('Phims'))->with(compact('phimngays'))->with(compact('chitiet_film'));
+		return view('pages.detail')->with(compact('Phims'))->with(compact('phimngays'))->with(compact('chitiet_film'))->with(compact('sliders'));
 
 
         // $detail_product = DB::table('tbl_product')

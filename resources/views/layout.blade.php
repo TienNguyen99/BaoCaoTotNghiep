@@ -27,6 +27,8 @@
     <link rel="stylesheet" href="{{asset('public/frontend/css/owl.carousel.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('public/frontend/css/slicknav.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('public/frontend/css/login-register.css')}}" type="text/css">
+    
 </head>
 
 <body>
@@ -50,17 +52,17 @@
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
-                                <li class="active"><a href="./trang-chu">Mua vé</a></li>
+                                <li class="active"><a href="{{URL::to('/trang-chu')}}">Mua vé</a></li>
                                 <li><a href="./categories.html">Điện ảnh <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="./categories.html">Thể loại</a></li>
                                         <li><a href="./anime-details.html">Diễn viên</a></li>
                                         <li><a href="./anime-watching.html">Đạo diễn</a></li>
-                                        <li><a href="./blog-details.html">Blog điện ảnh</a></li>
+                                        <li><a href="./blog-details.html">Rạp chiếu phim</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Liên hệ</a></li>
-                                <li><a href="./signup.html">Đăng ký</a></li>
+                                <li><a href="#">Rạp phim</a></li>
+                                
                                 
                             </ul>
                         </nav>
@@ -69,7 +71,7 @@
                 <div class="col-lg-2">
                     <div class="header__right">
                         <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                        <a href="./login.html"><span class="icon_profile"></span></a>
+                        <a href="javascript:;"><span class="icon_profile" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();"></span></a>
                     </div>
                 </div>
             </div>
@@ -83,42 +85,24 @@
     <section class="hero">
         <div class="container">
             <div class="hero__slider owl-carousel">
-                <div class="hero__items set-bg" data-setbg="{{asset('public/frontend/img/slider.jpg')}}">
+
+                <?php foreach ($sliders as $key => $slider): ?>
+                <div class="hero__items " style="background-image: url('{{Voyager::Image($slider->slider_image)}}'); background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;">
+                    
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="hero__text">
 
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
+                                <h2>&nbsp;</h2>
+                                <p>&nbsp;</p>
+                                <a href="#"><span>Xem chi tiết</span> <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="hero__items set-bg" data-setbg="{{asset('public/frontend/img/slider2.png')}}">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="hero__items set-bg" data-setbg="{{asset('public/frontend/img/slider3.jpg')}}">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-
-                                <h2>Fate / Stay Night: Unlimited Blade Works</h2>
-                                <p>After 30 days of travel across the world...</p>
-                                <a href="#"><span>Watch Now</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php endforeach ?>
             </div>
         </div>
     </section>
@@ -150,9 +134,8 @@
                             </ul>
                             <?php foreach ($Phims as $key => $phim): ?>
                                 <div class="filter__gallery">
-                                    <div class="product__sidebar__view__item set-bg mix day years"
-                                    data-setbg="img/sidebar/tv-1.jpg">
-                                    <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="300px" width="100%">
+                                    <div class="product__sidebar__view__item set-bg mix day years">
+                                    <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
 
                                     <div class="ep">18 / ?</div>
                                     <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
@@ -161,34 +144,38 @@
                             <?php endforeach ?>
                             <?php foreach ($Phims as $key => $phim): ?>
                                 <div class="product__sidebar__view__item set-bg mix month week"
-                                data-setbg="img/sidebar/tv-2.jpg">
-                                <div class="ep">18 / ?</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                                <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
+                                >
+                                <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
+    <div class="ep">Đánh giá {{$phim->rate}} / 5 sao</div> 
+    <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
+                                    <h5><a href="#">{{$phim->namef}}</a></h5>
                             </div>
                         <?php endforeach ?>
                         <?php foreach ($Phims as $key => $phim): ?>
                           <div class="product__sidebar__view__item set-bg mix week years"
-                          data-setbg="img/sidebar/tv-3.jpg">
-                          <div class="ep">18 / ?</div>
-                          <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                          <h5><a href="#">Sword art online alicization war of underworld</a></h5>
+                          >
+                          <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
+    <div class="ep">Đánh giá {{$phim->rate}} / 5 sao</div> 
+    <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
+                                    <h5><a href="#">{{$phim->namef}}</a></h5>
                       </div>  
                   <?php endforeach ?>
                   <?php foreach ($Phims as $key => $phim): ?>
                   <div class="product__sidebar__view__item set-bg mix years month"
-                  data-setbg="img/sidebar/tv-4.jpg">
-                  <div class="ep">18 / ?</div>
-                  <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                  <h5><a href="#">Fate/stay night: Heaven's Feel I. presage flower</a></h5>
+                  >
+                  <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
+    <div class="ep">Đánh giá {{$phim->rate}} / 5 sao</div> 
+    <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
+                                    <h5><a href="#">{{$phim->namef}}</a></h5>
               </div>   
           <?php endforeach ?>
           <?php foreach ($phimngays as $key => $phimngay): ?>
           <div class="product__sidebar__view__item set-bg mix day"
-          data-setbg="img/sidebar/tv-5.jpg">
-          <div class="ep">18 / ?</div>
-          <div class="view"><i class="fa fa-eye"></i> 9141</div>
-          <h5><a href="#">{{$phimngay -> namef}}</a></h5>
+          >
+          <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
+    <div class="ep">Đánh giá {{$phim->rate}} / 5 sao</div> 
+    <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
+                                    <h5><a href="#">{{$phim->namef}}</a></h5>
       </div>  
   <?php endforeach ?> 
 
@@ -298,12 +285,83 @@
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch"><i class="icon_close"></i></div>
         <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="Search here.....">
+            <input type="text" id="search-input" placeholder="Vui lòng nhập tên phim.....">
         </form>
     </div>
 </div>
 <!-- Search model end -->
-
+<!-- Login Modal -->
+<!-- Modal -->
+         <div class="modal fade login" id="loginModal">
+              <div class="modal-dialog login animated">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        
+                        <h4 class="modal-title">Đăng nhập</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="box">
+                             <div class="content">
+                                <div class="social">
+                                    <a class="circle github" href="#">
+                                        <i class="fa fa-github fa-fw"></i>
+                                    </a>
+                                    <a id="google_login" class="circle google" href="#">
+                                        <i class="fa fa-google-plus fa-fw"></i>
+                                    </a>
+                                    <a id="facebook_login" class="circle facebook" href="#">
+                                        <i class="fa fa-facebook fa-fw"></i>
+                                    </a>
+                                </div>
+                                <div class="division">
+                                    <div class="line l"></div>
+                                      <span>Hoặc</span>
+                                    <div class="line r"></div>
+                                </div>
+                                <div class="error"></div>
+                                <div class="form loginBox">
+                                    <form method="" action="" accept-charset="UTF-8">
+                                    <input id="email" class="form-control" type="text" placeholder="Email" name="email">
+                                    <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                                    <input class="btn btn-default btn-login" type="button" value="Đăng nhập" >
+                                    </form>
+                                </div>
+                             </div>
+                        </div>
+                        <div class="box">
+                            <div class="content registerBox" style="display:none;">
+                             <div class="form">
+                                <form method="" html="{:multipart=>true}" data-remote="true" action="" accept-charset="UTF-8">
+                                <input id="email" class="form-control" type="text" placeholder="Email" name="email">
+                                <input id="password" class="form-control" type="password" placeholder="Password" name="password">
+                                <input id="password_confirmation" class="form-control" type="password" placeholder="Repeat Password" name="password_confirmation">
+                                <input class="btn btn-default btn-register" type="button" value="Đăng ký" name="commit">
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="forgot login-footer">
+                            <span>Bạn chưa có tài khoản?
+                                 <a href="javascript: showRegisterForm();">Tạo ngay!</a>
+                            </span>
+                        </div>
+                        <div class="forgot register-footer" style="display:none">
+                             <span>Đã có tài khoản?</span>
+                             <a href="javascript: showLoginForm();">Đăng nhập.</a>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+          </div>
+    </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        openLoginModal();
+    });
+</script>
+<!-- End login/register Modal-->
 <!-- Js Plugins -->
 <script src="{{asset('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
@@ -313,7 +371,7 @@
 <script src="{{asset('public/frontend/js/jquery.slicknav.js')}}"></script>
 <script src="{{asset('public/frontend/js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('public/frontend/js/main.js')}}"></script>
-
+<script src="{{asset('public/frontend/js/login-register.js')}}"></script>
 
 </body>
 
