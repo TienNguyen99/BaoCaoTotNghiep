@@ -40,7 +40,7 @@
                                         <ul>
                                             
                                             <li><span>Diễn viên:</span> {{$value-> actor}}</li>
-                                            <li><span>Date aired:</span> Oct 02, 2019 to ?</li>
+                                            <li><span>Date aired:</span> {{$value->created_at}}</li>
                                             <li><span>Tình trạng:</span> {{$value->status}}</li>
                                             <li><span>Thể loại:</span> {{$value ->namet}}</li>
                                         </ul>
@@ -57,7 +57,7 @@
                                 </div>
                             </div>
                             <div class="anime__details__btn">
-                                <a href="#" class="follow-btn"><i class="fa fa-heart-o"></i> Trailer</a>
+                                <a href="#trailerModal" class="follow-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/Jfrjeg26Cwk" ><i class="fa fa-heart-o"></i> Trailer</a>
                                 <a href="#" class="watch-btn"><span>Đặt vé</span> <i
                                     class="fa fa-angle-right"></i></a>
                                 </div>
@@ -101,6 +101,82 @@
             
         </section>
         <!-- Anime Section End -->
+<!-- Modal -->
+<div class="modal fade" id="trailerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-top: 25%">
+  <div class="modal-dialog" role="document" style="      max-width: 800px;margin: 30px auto;">
+    <div class="modal-content">
+
+      
+      <div class="modal-body" style="  position:relative;
+  padding:0px;">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="  position:absolute;
+  right:-30px;
+  top:0;
+  z-index:999;
+  font-size:2rem;
+  font-weight: normal;
+  color:#fff;
+  opacity:1;">
+          <span aria-hidden="true">&times;</span>
+        </button>        
+        <!-- 16:9 aspect ratio -->
+<div class="embed-responsive embed-responsive-16by9">
+
+  <iframe class="embed-responsive-item" src="{{$value->youtube}}" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
+</div>
+        
+        
+      </div>
+
+    </div>
+  </div>
+</div> 
+  
+  
+  
+<script type="text/javascript">
+    $(document).ready(function() {
+
+// Gets the video src from the data-src on each button
+
+var $videoSrc;  
+$('.video-btn').click(function() {
+    $videoSrc = $(this).data( "src" );
+});
+console.log($videoSrc);
+
+  
+  
+// when the modal is opened autoplay it  
+$('#trailerModal').on('shown.bs.modal', function (e) {
+    
+// set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
+$("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0" ); 
+})
+  
+
+
+// stop playing the youtube video when I close the modal
+$('#trailerModal').on('hide.bs.modal', function (e) {
+    // a poor man's stop video
+    $("#video").attr('src',$videoSrc); 
+}) 
+    
+    
+
+
+  
+  
+// document ready  
+});
+
+
+
+
+</script>
+
+
 
 <?php endforeach ?>
     <!-- Header Section Begin -->

@@ -88,5 +88,35 @@ class HomeController extends Controller
             $customer ->customer_birth = $req ->birth;
             $customer ->save();
             return redirect()->back()->with('thanhcong','Tạo tài khoản thành công.');
-        }      
+        }       
+
+// // Dang nhap
+        public function postDangnhap(Request $req)
+        {
+            $this->validate($req,
+
+                [
+                    'email'=>'required|email',
+                    'password'=>'required|min:6|max:20'
+
+                ],
+
+                [
+                    'email.email'=>'Không đúng định dạng email',
+                    'password.min'=>'Mật khẩu ít nhất 6 ký tự',
+                    'password.max'=>'Mật khẩu không quá 20 ký tự'
+                ]
+
+            );
+            $credentials = array('email'=>$req->email,'password'=>$req->password);
+            if(Auth::attempt($credentials)){
+                return redirect()->back()->with(['flag'=>'success','message'=>'Đăng nhập thành công']);
+            }
+            else
+            {
+                return redirect()->back()->with(['flag'=>'danger','message'=>'Đăng nhập không thành công']);
+            }
+
+        }
+
 }

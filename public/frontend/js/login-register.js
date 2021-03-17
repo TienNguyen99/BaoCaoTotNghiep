@@ -56,7 +56,11 @@ function loginAjax(){
     */
 
 /*   Simulate error message from the server   */
+    $("#loginModal").submit(function (objEvent) {
+        objEvent.preventDefault();
+    })
      shakeModal();
+
 }
 
 function shakeModal(){

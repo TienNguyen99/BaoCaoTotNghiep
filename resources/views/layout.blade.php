@@ -134,50 +134,17 @@
                             </ul>
                             <?php foreach ($Phims as $key => $phim): ?>
                                 <div class="filter__gallery">
-                                    <div class="product__sidebar__view__item set-bg mix day years">
-                                    <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
+                                    <div class="product__sidebar__view__item  mix day years">
+                                        <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
 
-                                    <div class="ep">18 / ?</div>
-                                    <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
-                                    <h5><a href="#">{{$phim->namef}}</a></h5>
-                                </div>
+                                        <div class="ep">18 / ?</div>
+                                        <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
+                                        <h5><a href="#">{{$phim->namef}}</a></h5>
+                                    </div>
                             <?php endforeach ?>
-                            <?php foreach ($Phims as $key => $phim): ?>
-                                <div class="product__sidebar__view__item set-bg mix month week"
-                                >
-                                <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
-    <div class="ep">Đánh giá {{$phim->rate}} / 5 sao</div> 
-    <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
-                                    <h5><a href="#">{{$phim->namef}}</a></h5>
-                            </div>
-                        <?php endforeach ?>
-                        <?php foreach ($Phims as $key => $phim): ?>
-                          <div class="product__sidebar__view__item set-bg mix week years"
-                          >
-                          <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
-    <div class="ep">Đánh giá {{$phim->rate}} / 5 sao</div> 
-    <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
-                                    <h5><a href="#">{{$phim->namef}}</a></h5>
-                      </div>  
-                  <?php endforeach ?>
-                  <?php foreach ($Phims as $key => $phim): ?>
-                  <div class="product__sidebar__view__item set-bg mix years month"
-                  >
-                  <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
-    <div class="ep">Đánh giá {{$phim->rate}} / 5 sao</div> 
-    <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
-                                    <h5><a href="#">{{$phim->namef}}</a></h5>
-              </div>   
-          <?php endforeach ?>
-          <?php foreach ($phimngays as $key => $phimngay): ?>
-          <div class="product__sidebar__view__item set-bg mix day"
-          >
-          <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
-    <div class="ep">Đánh giá {{$phim->rate}} / 5 sao</div> 
-    <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
-                                    <h5><a href="#">{{$phim->namef}}</a></h5>
-      </div>  
-  <?php endforeach ?> 
+
+
+
 
 </div>
 
@@ -320,10 +287,10 @@
                                 </div>
                                 <div class="error"></div>
                                 <div class="form loginBox">
-                                    <form method="" action="" accept-charset="UTF-8">
+                                    <form method="" action="{{action('HomeController@postDangky')}}" accept-charset="UTF-8">
                                     <input id="email" class="form-control" type="text" placeholder="Email" name="email">
                                     <input id="password" class="form-control" type="password" placeholder="Mật khẩu" name="password">
-                                    <input class="btn btn-default btn-login" type="button" value="Đăng nhập" >
+                                    <input class="btn btn-default btn-login" type="submit" value="Đăng nhập" onclick="loginAjax()">
                                     </form>
                                 </div>
                              </div>
@@ -379,6 +346,12 @@
         openLoginModal();
     });
 </script>
+<script type="text/javascript">
+    
+        $("#loginModal").submit(function (objEvent) {
+        objEvent.preventDefault();
+    })
+</script>
 <!-- End login/register Modal-->
 <!-- Js Plugins -->
 <script src="{{asset('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
@@ -390,7 +363,7 @@
 <script src="{{asset('public/frontend/js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('public/frontend/js/main.js')}}"></script>
 <script src="{{asset('public/frontend/js/login-register.js')}}"></script>
-
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 
 </html>
