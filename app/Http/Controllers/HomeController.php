@@ -102,7 +102,7 @@ class HomeController extends Controller
             $customer = new Customer();
             $customer ->customer_name = $req->fullname;
             $customer ->customer_email = $req ->email;
-            $customer ->customer_password = $req ->password;
+            $customer ->customer_password = Hash::make($req ->password);
             $customer ->customer_phone = $req ->phone;
             $customer ->customer_address = $req ->address;
             $customer ->customer_birth = $req ->birth;
@@ -115,33 +115,30 @@ class HomeController extends Controller
 // // Dang nhap
         public function postDangnhap(Request $req)
         {
-            // $this->validate($req,
 
-            //     [
-            //         'email'=>'required|email',
-            //         'password'=>'required|min:6|max:20'
-
-            //     ]
-            // );
                 $validator = Validator::make($req->all(),
                 [
                  'email'=>'required|email',
                  'password'=>'required|min:6|max:20'
                 ]
         );
+
             $credentials = array('email'=>$req->email,'password'=>$req->password);
             
-            if(Auth::attempt($credentials)){
+            if(Auth::guard('customers')->attempt($credentials)){
+                
+                // dd('Thanh cong');
                 return redirect()->back()->with('success','Đăng nhập thành công.');
             }
             else
             {
+                // dd('that bai');
                 return redirect()->back()->with('toast_error','Đăng nhập thất bại.');
             }
 
         }
         public function postDangxuat(Request $req){
-            Auth::logout();
+            Auth::guard('customers')->logout();
             return redirect()->route('index');
         }
 

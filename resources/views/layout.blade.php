@@ -69,12 +69,12 @@
                 <div class="col-lg-4">
                     <div class="header__right">
 
-                        <?php if (Auth::check()): ?>
+                        <?php if (Auth::guard('customers')->check()): ?>
                             <nav class="header__menu mobile-menu">
-                                <ul>    <li><a href="">Chào bạn, {{Auth::user()->name}} <span class="arrow_carrot-down"></span></a>
+                                <ul>    <li><a href="" >Chào bạn,{{Auth::guard('customers')->user()->customer_name}}  <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
-                                        <li><a href="#">Thông tin tài khoản</a></li>
-                                        <li><a href="{{route('custom.logout')}}">Đăng xuất</a></li>
+                                        <li><a href="#" >Thông tin tài khoản</a></li>
+                                        <li><a href= "{{route('custom.logout')}}">Đăng xuất</a></li>
 
                                     </ul>
                                 </li></ul>

@@ -3,11 +3,14 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
-class Customer extends Model
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+class Customer extends Authenticatable
 {
+	use Notifiable;
     protected $primaryKey ='customer_id';
     protected $table = 'customer';
-    protected $hidden = 'remember_token',
-    ;
+    protected $hidden = 'remember_token';
+    
 }

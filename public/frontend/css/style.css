@@ -433,7 +433,9 @@ ol {
 
 .header__right a:last-child {
 	margin-right: 0;
+	padding-top: 15px;
 }
+
 
 .slicknav_menu {
 	display: none;
