@@ -8,4 +8,6 @@ class Customer extends Model
 {
     protected $primaryKey ='customer_id';
     protected $table = 'customer';
+    protected $hidden = 'remember_token',
+    ;
 }

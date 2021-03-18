@@ -111,7 +111,9 @@ ol {
 /*---------------------
   Helper CSS
 -----------------------*/
-
+.swal2-select {
+	display:none !important;
+}
 .section-title {
 	margin-bottom: 30px;
 }
@@ -419,7 +421,7 @@ ol {
 
 .header__right {
 	text-align: right;
-	padding: 20px 0 15px;
+	
 }
 
 .header__right a {

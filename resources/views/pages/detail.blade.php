@@ -1,7 +1,9 @@
 @extends('layout')
 @section('content')
 
-
+    <div id="preloder">
+        <div class="loader"></div>
+    </div>
 <?php foreach ($chitiet_film as $key => $value): ?>
     
   <section class="anime-details spad">

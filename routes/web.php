@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DetailController;
+use RealRashid\SweetAlert\Facades\Alert;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,12 +16,14 @@ use App\Http\Controllers\DetailController;
 */
 
 Route::get('/','HomeController@index');
-
-Route::get('/trang-chu','HomeController@index');
-//Dang ky, dang nhap post
-Route::post('/trang-chu','HomeController@postDangky');
+Route::get('/test','HomeController@test');
+Route::get('/trang-chu','HomeController@index')->name('index');
 
 
+//Dang ky, dang nhap ,dang xuat
+Route::post('/register','HomeController@postDangky')->name('custom.register');
+Route::post('/login','HomeController@postDangnhap')->name('custom.login');
+Route::get('/logout','HomeController@postDangxuat')->name('custom.logout');
 
 Route::get('/detail/{filid}','DetailController@detail_film');
 

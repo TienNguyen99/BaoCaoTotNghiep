@@ -8,6 +8,9 @@ use DB;
 use Carbon\Carbon;
 use App\Customer;
 use Hash;
+use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
+use Auth;
 class HomeController extends Controller
 {
     public function index()
@@ -61,62 +64,85 @@ class HomeController extends Controller
 
     	return view('pages.home')->with(compact("Phims"))->with(compact('phimngays'))->with(compact('comment'))->with(compact('sliders'));
     }
+    public function test(){
+        Alert::success('Success Title', 'Success Message');
+        return view('pages.test');
+    }
 
         public function postDangky(Request $req){
-            $this ->validate($req,
+            // $this ->validate($req,
 
+            //     ['email' => 'required|email|unique:customer,customer_email' ,
+            //      'password' =>'required|min:6|max:20',
+            //      'fullname'=>'required',
+            //      're_password'=>'required|same:password'
+            //        ],[
+            //        'email.required'=>'Vui lòng nhập email',
+            //        'email.email'=>'Không đúng định dạng mail',
+            //        'email.unique'=>'Email đã có người dùng.',
+            //        'password.required'=>'Vui lòng nhập mật khẩu',
+            //        're_password.same'=>'Mật khẩu không trùng khớp',
+            //        'password.min'=>'Mật khẩu ít nhất 6 ký tự'
+            //           ]
+
+            // );
+
+            $validator = Validator::make($req->all(),
                 ['email' => 'required|email|unique:customer,customer_email' ,
                  'password' =>'required|min:6|max:20',
                  'fullname'=>'required',
                  're_password'=>'required|same:password'
-                   ],[
-                   'email.required'=>'Vui lòng nhập email',
-                   'email.email'=>'Không đúng định dạng mail',
-                   'email.unique'=>'Email đã có người dùng.',
-                   'password.required'=>'Vui lòng nhập mật khẩu',
-                   're_password.same'=>'Mật khẩu không trùng khớp',
-                   'password.min'=>'Mật khẩu ít nhất 6 ký tự'
-                      ]
+                ]
+        );
 
-            );
+            if ($validator ->fails())
+            {
+                return back()->with('toast_error',$validator->messages()->all()[0])->withInput();
+            }else
             $customer = new Customer();
             $customer ->customer_name = $req->fullname;
             $customer ->customer_email = $req ->email;
-            $customer ->customer_password = Hash::make($req ->password);
+            $customer ->customer_password = $req ->password;
             $customer ->customer_phone = $req ->phone;
             $customer ->customer_address = $req ->address;
             $customer ->customer_birth = $req ->birth;
             $customer ->save();
-            return redirect()->back()->with('thanhcong','Tạo tài khoản thành công.');
+                
+            
+            return redirect()->back()->with('success','Đăng ký thành công.');
         }       
 
 // // Dang nhap
         public function postDangnhap(Request $req)
         {
-            $this->validate($req,
+            // $this->validate($req,
 
+            //     [
+            //         'email'=>'required|email',
+            //         'password'=>'required|min:6|max:20'
+
+            //     ]
+            // );
+                $validator = Validator::make($req->all(),
                 [
-                    'email'=>'required|email',
-                    'password'=>'required|min:6|max:20'
-
-                ],
-
-                [
-                    'email.email'=>'Không đúng định dạng email',
-                    'password.min'=>'Mật khẩu ít nhất 6 ký tự',
-                    'password.max'=>'Mật khẩu không quá 20 ký tự'
+                 'email'=>'required|email',
+                 'password'=>'required|min:6|max:20'
                 ]
-
-            );
+        );
             $credentials = array('email'=>$req->email,'password'=>$req->password);
+            
             if(Auth::attempt($credentials)){
-                return redirect()->back()->with(['flag'=>'success','message'=>'Đăng nhập thành công']);
+                return redirect()->back()->with('success','Đăng nhập thành công.');
             }
             else
             {
-                return redirect()->back()->with(['flag'=>'danger','message'=>'Đăng nhập không thành công']);
+                return redirect()->back()->with('toast_error','Đăng nhập thất bại.');
             }
 
+        }
+        public function postDangxuat(Request $req){
+            Auth::logout();
+            return redirect()->route('index');
         }
 
 }
