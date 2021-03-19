@@ -60,7 +60,7 @@
                             </div>
                             <div class="anime__details__btn">
                                 <a href="#trailerModal" class="follow-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/Jfrjeg26Cwk" ><i class="fa fa-heart-o"></i> Trailer</a>
-                                <a href="#" class="watch-btn"><span>Đặt vé</span> <i
+                                <a href="#bookingModal" class="watch-btn" data-toggle ="modal" data-tartget ="#bookingModal"><span>Đặt vé</span> <i
                                     class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
@@ -124,60 +124,40 @@
         </button>        
         <!-- 16:9 aspect ratio -->
 <div class="embed-responsive embed-responsive-16by9">
-
   <iframe class="embed-responsive-item" src="{{$value->youtube}}" id="video"  allowscriptaccess="always" allow="autoplay"></iframe>
 </div>
-        
-        
       </div>
 
     </div>
   </div>
 </div> 
+  <!--Booking Modal -->
+  <!-- Modal -->
+
+<!--End Booking modal -->  
   
-  
-  
+  <!--Script Trailer Modal -->
 <script type="text/javascript">
     $(document).ready(function() {
-
 // Gets the video src from the data-src on each button
-
 var $videoSrc;  
 $('.video-btn').click(function() {
     $videoSrc = $(this).data( "src" );
 });
 console.log($videoSrc);
-
-  
-  
 // when the modal is opened autoplay it  
-$('#trailerModal').on('shown.bs.modal', function (e) {
-    
+$('#trailerModal').on('shown.bs.modal', function (e) {  
 // set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
 $("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0" ); 
 })
-  
-
-
 // stop playing the youtube video when I close the modal
 $('#trailerModal').on('hide.bs.modal', function (e) {
     // a poor man's stop video
     $("#video").attr('src',$videoSrc); 
 }) 
-    
-    
-
-
-  
-  
-// document ready  
 });
-
-
-
-
 </script>
-
+ <!-- End Script Traler -->
 
 
 <?php endforeach ?>

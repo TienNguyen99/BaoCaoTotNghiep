@@ -17,6 +17,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 Route::get('/','HomeController@index');
 Route::get('/test','HomeController@test');
+Route::post('/dangky','HomeController@dangkytest')->name('custom.dangkytest');
 Route::get('/trang-chu','HomeController@index')->name('index');
 
 
@@ -24,9 +25,11 @@ Route::get('/trang-chu','HomeController@index')->name('index');
 Route::post('/register','HomeController@postDangky')->name('custom.register');
 Route::post('/login','HomeController@postDangnhap')->name('custom.login');
 Route::get('/logout','HomeController@postDangxuat')->name('custom.logout');
-
+//
 Route::get('/detail/{filid}','DetailController@detail_film');
+//Tim kiem
 
+Route::get('/search','HomeController@getSearch')->name('search');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();

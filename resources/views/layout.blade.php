@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="{{asset('public/frontend/css/slicknav.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('public/frontend/css/login-register.css')}}" type="text/css">
+    <!-- <link href="{{asset('public/frontend/css/stylebooking.css')}}" rel="stylesheet" type="text/css" media="all" /> -->
 
 </head>
 
@@ -183,45 +184,7 @@
             <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
         </div>
     </div>
-    <div class="product__sidebar__comment__item">
-        <div class="product__sidebar__comment__item__pic">
-            <img src="img/sidebar/comment-2.jpg" alt="">
-        </div>
-        <div class="product__sidebar__comment__item__text">
-            <ul>
-                <li>Active</li>
-                <li>Movie</li>
-            </ul>
-            <h5><a href="#">Shirogane Tamashii hen Kouhan sen</a></h5>
-            <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-        </div>
-    </div>
-    <div class="product__sidebar__comment__item">
-        <div class="product__sidebar__comment__item__pic">
-            <img src="img/sidebar/comment-3.jpg" alt="">
-        </div>
-        <div class="product__sidebar__comment__item__text">
-            <ul>
-                <li>Active</li>
-                <li>Movie</li>
-            </ul>
-            <h5><a href="#">Kizumonogatari III: Reiket su-hen</a></h5>
-            <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-        </div>
-    </div>
-    <div class="product__sidebar__comment__item">
-        <div class="product__sidebar__comment__item__pic">
-            <img src="img/sidebar/comment-4.jpg" alt="">
-        </div>
-        <div class="product__sidebar__comment__item__text">
-            <ul>
-                <li>Active</li>
-                <li>Movie</li>
-            </ul>
-            <h5><a href="#">Monogatari Series: Second Season</a></h5>
-            <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-        </div>
-    </div>
+
 </div>
 </div>
 </div>
@@ -267,8 +230,8 @@
   <div class="search-model">
     <div class="h-100 d-flex align-items-center justify-content-center">
         <div class="search-close-switch"><i class="icon_close"></i></div>
-        <form class="search-model-form">
-            <input type="text" id="search-input" placeholder="Vui lòng nhập tên phim.....">
+        <form class="search-model-form" name="key" action="{{route('search')}}">
+            <input type="text" name="key" id="search-input" placeholder="Vui lòng nhập tên phim.....">
         </form>
     </div>
 </div>
@@ -363,7 +326,8 @@
                   </div>
               </div>
           </div>
-    </div>
+    
+
 <script type="text/javascript">
     $(document).ready(function(){
         openLoginModal();
@@ -384,6 +348,8 @@
 <script src="{{asset('public/frontend/js/main.js')}}"></script>
 <script src="{{asset('public/frontend/js/login-register.js')}}"></script>
 
+
+<script src="{{asset('public/frontend/js/jquery.seat-charts.js')}}"></script>
 </body>
 
 </html>

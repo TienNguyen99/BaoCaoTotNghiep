@@ -21,32 +21,33 @@ class HomeController extends Controller
         ->join('Feedback', 'film.film_feedid','=','Feedback.feedid')
         ->where('film.status','1')
         ->get();
-
+        
+        
         
         //Slider
         $sliders = db::table('slider')
         ->where('slider_status','1')
         ->get();
         //Phim ngay
-        $phimngays = db::table('film')
-        ->where('status','1')
+        // $phimngays = db::table('film')
+        // ->where('status','1')
 
-        ->get();
-        //Phim tuan
-        $phimtuans = db::table('film')
-        ->where('status','1')
-        ->orderby('created_at','desc')
-        ->get();
-        //Phim thang
-        $phimthangs = db::table('film')
-        ->where('status','1')
-        ->orderby('created_at','desc')
-        ->get();
-        //Phim nam
-        $phimnam = db::table('film')
-        ->where('status','1')
-        ->orderby('created_at','desc')
-        ->get();
+        // ->get();
+        // //Phim tuan
+        // $phimtuans = db::table('film')
+        // ->where('status','1')
+        // ->orderby('created_at','desc')
+        // ->get();
+        // //Phim thang
+        // $phimthangs = db::table('film')
+        // ->where('status','1')
+        // ->orderby('created_at','desc')
+        // ->get();
+        // //Phim nam
+        // $phimnam = db::table('film')
+        // ->where('status','1')
+        // ->orderby('created_at','desc')
+        // ->get();
 
         // $film = Film::find('')->userAdmin()->get();
         // $film = \App\Film::all();
@@ -62,11 +63,30 @@ class HomeController extends Controller
         //Dang ky
 
 
-    	return view('pages.home')->with(compact("Phims"))->with(compact('phimngays'))->with(compact('comment'))->with(compact('sliders'));
+    	return view('pages.home')->with(compact("Phims"))->with(compact('sliders'));
     }
     public function test(){
-        Alert::success('Success Title', 'Success Message');
-        return view('pages.test');
+        $Phims = DB::table('film')
+        ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
+        ->join('Feedback', 'film.film_feedid','=','Feedback.feedid')
+        ->join('Showtime', 'film.filid','=','Showtime.showtime_id')
+        ->where('film.status','1')
+        ->get();
+        return view('pages.test')->with(compact('Phims'))->with(compact('comment'));
+    }
+    public function dangkytest(Request $req){
+
+            $customer = new Customer();
+            $customer ->customer_name = $req->fullname;
+            $customer ->email = $req ->email;
+            $customer ->password = Hash::make($req ->password);
+            $customer ->customer_phone = $req ->phone;
+            $customer ->customer_address = $req ->address;
+            $customer ->customer_birth = $req ->birth;
+            $customer ->save();
+                
+            
+            return redirect()->back()->with('success','Đăng ký thành công.');
     }
 
         public function postDangky(Request $req){
@@ -101,8 +121,8 @@ class HomeController extends Controller
             }else
             $customer = new Customer();
             $customer ->customer_name = $req->fullname;
-            $customer ->customer_email = $req ->email;
-            $customer ->customer_password = Hash::make($req ->password);
+            $customer ->email = $req ->email;
+            $customer ->password = Hash::make($req ->password);
             $customer ->customer_phone = $req ->phone;
             $customer ->customer_address = $req ->address;
             $customer ->customer_birth = $req ->birth;
@@ -140,6 +160,26 @@ class HomeController extends Controller
         public function postDangxuat(Request $req){
             Auth::guard('customers')->logout();
             return redirect()->route('index');
+        }
+        public function getSearch(Request $req){
+        $Phims = DB::table('film')
+        ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
+        ->join('Feedback', 'film.film_feedid','=','Feedback.feedid')
+        ->where('film.status','1')
+        ->get();
+
+        
+        //Slider
+        $sliders = db::table('slider')
+        ->where('slider_status','1')
+        ->get();
+        $film = DB::table('film')
+        ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
+        ->join('Feedback', 'film.film_feedid','=','Feedback.feedid')
+        ->where('namef','like','%'.$req->key.'%')
+        ->orWhere('namet','like','%'.$req->key.'%')
+        ->get();
+            return view('pages.search')->with(compact('film'))->with(compact('Phims'))->with(compact('sliders'));
         }
 
 }
