@@ -10,7 +10,7 @@ class DetailController extends Controller
     public function detail_film($filid){
 		$Phims = DB::table('film')
 		->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
-		->join('Feedback', 'film.film_feedid','=','Feedback.feedid')
+		->join('Feedback', 'film.status','=','Feedback.status')
 		->where('film.status','1')
 		->get();
 
@@ -24,7 +24,7 @@ class DetailController extends Controller
 
 		$chitiet_film = DB::table('film')
 		->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
-		->join('Feedback', 'film.film_feedid','=','Feedback.feedid')
+		->join('Feedback', 'film.status','=','Feedback.status')
 		->where('film.filid',$filid)->get();
 		return view('pages.detail')->with(compact('Phims'))->with(compact('phimngays'))->with(compact('chitiet_film'))->with(compact('sliders'));
 

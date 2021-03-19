@@ -40,54 +40,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <script src="{{asset('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
 </head>
 <body>
-                                <form method="post" html="{:multipart=>true}" data-remote="true" action="{{ route('custom.dangkytest')}}" accept-charset="UTF-8" >
-                                    <input type="hidden" name="_token" value="{{csrf_token()}}">
-                                    <?php if (count(array($errors))>0): ?>
-                                        
-                                            <?php foreach ($errors->all() as $err): ?>
-                                                {{$err}}
-                                            <?php endforeach ?>
 
-
-                                        
-                                    <?php endif ?>
-                                <?php if (Session::has('success')): ?>
-                                    <div class="alert alert-success">{{Session::get('success')}}</div>
-                                <?php endif ?>
-                                <?php foreach ($Phims as $key => $value): ?>
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
-  <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
-  <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
-</ul>
-
-<div class="tab-content">
-  <div id="home" class="tab-pane fade in active">
-    <h3>HOME</h3>
-    <p>Some content.</p>
-  </div>
-  <div id="menu1" class="tab-pane fade">
-    <h3>Menu 1</h3>
-    <p>Some content in menu 1.</p>
-  </div>
-  <div id="menu2" class="tab-pane fade">
-    <h3>Menu 2</h3>
-    <p>Some content in menu 2.</p>
-  </div>
-</div>
-
-                                <?php endforeach ?>
-                                  
-
-
- 								
-                                
-                                <input class="btn btn-default btn-register" type="submit" value="Đăng ký" name="commit">
-                                </form>
-                                <script type="text/javascript">
-                                	
-
-                                </script>
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 
 <script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>

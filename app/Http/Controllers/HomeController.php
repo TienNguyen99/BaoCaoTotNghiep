@@ -18,10 +18,10 @@ class HomeController extends Controller
         // $Phims = array();
     	$Phims = DB::table('film')
         ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
-        ->join('Feedback', 'film.film_feedid','=','Feedback.feedid')
+        ->join('Feedback', 'film.status','=','Feedback.status')
         ->where('film.status','1')
         ->get();
-        
+
         
         
         //Slider
@@ -68,7 +68,7 @@ class HomeController extends Controller
     public function test(){
         $Phims = DB::table('film')
         ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
-        ->join('Feedback', 'film.film_feedid','=','Feedback.feedid')
+        ->join('Feedback', 'film.status','=','Feedback.status')
         ->join('Showtime', 'film.filid','=','Showtime.showtime_id')
         ->where('film.status','1')
         ->get();
@@ -164,7 +164,7 @@ class HomeController extends Controller
         public function getSearch(Request $req){
         $Phims = DB::table('film')
         ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
-        ->join('Feedback', 'film.film_feedid','=','Feedback.feedid')
+        ->join('Feedback', 'film.status','=','Feedback.status')
         ->where('film.status','1')
         ->get();
 
@@ -175,7 +175,7 @@ class HomeController extends Controller
         ->get();
         $film = DB::table('film')
         ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
-        ->join('Feedback', 'film.film_feedid','=','Feedback.feedid')
+        ->join('Feedback', 'film.status','=','Feedback.status')
         ->where('namef','like','%'.$req->key.'%')
         ->orWhere('namet','like','%'.$req->key.'%')
         ->get();

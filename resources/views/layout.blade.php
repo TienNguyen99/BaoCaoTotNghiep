@@ -276,7 +276,7 @@
                                 <?php endif ?>
                                     <input id="email" class="form-control" type="text" placeholder="Email" name="email">
                                     <input id="password" class="form-control" type="password" placeholder="Mật khẩu" name="password">
-                                    <input class="btn btn-default btn-login" type="submit" value="Đăng nhập" >
+                                    <input class="btn btn-default btn-login" type="submit" value="Đăng nhập" onclick="loginAjax()" >
                                     </form>
                                 </div>
                              </div>

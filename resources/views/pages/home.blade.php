@@ -21,12 +21,14 @@
             <div
     class="col-lg-4 col-md-6 col-sm-6"> 
     <div class="product__item"> 
-        <div class="product__item__pic set-bg" > 
-    <img src="{{asset('storage/app/public/'.$phim->picture)}}"> 
-    <div class="ep">Đánh giá {{$phim->rate}} / 5 sao</div> 
-    <div class="comment"><i class="fa fa-comments"></i> {{  $phim-> film_feedid }}</div> 
-    <div class="view"><i class="fa fa-eye"></i> 9141</div>
-
+                <div class="product__item__pic" style="
+                background-image: url('{{Voyager::Image($phim->picture)}}'); 
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: top center;">
+                    <div class="ep">Đánh giá {{$phim->rate}} / 10</div>
+                    <div class="comment"><i class="fa fa-comments"></i> </div>
+                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                 </div>
                 <div class="product__item__text">
                     <ul>
