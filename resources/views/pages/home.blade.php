@@ -26,7 +26,7 @@
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: top center;">
-                    <div class="ep">Đánh giá {{$phim->rate}} / 10</div>
+                    <div class="ep">Đánh giá {{$phim->rate}} / 5</div>
                     <div class="comment"><i class="fa fa-comments"></i> </div>
                     <div class="view"><i class="fa fa-eye"></i> 9141</div>
                 </div>
@@ -62,24 +62,24 @@
         </div>
     </div>
     <div class="row">
-        <?php foreach ($Phims as $key => $phim): ?>
+        <?php foreach ($Phimsupcoming as $key => $phimup): ?>
         <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="product__item">
                 <div class="product__item__pic" style="
-                background-image: url('{{Voyager::Image($phim->picture)}}'); 
+                background-image: url('{{Voyager::Image($phimup->picture)}}'); 
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: top center;">
-                    <div class="ep">18 / 18</div>
+                    <div class="ep">Đánh giá {{$phim->rate}} / 5</div>
                     <div class="comment"><i class="fa fa-comments"></i> 11</div>
                     <div class="view"><i class="fa fa-eye"></i> 9141</div>
                 </div>
                 <div class="product__item__text">
                     <ul>
-                        <li>{{$phim->namet}}</li>
+                        <li>{{$phimup->namet}}</li>
                         
                     </ul>
-                    <h5><a href="#">{{$phim->namef}}</a></h5>
+                    <h5><a href="{{URL::to('/detail/'.$phim->filid)}}">{{$phimup->namef}}</a></h5>
                 </div>
             </div>
         </div>            

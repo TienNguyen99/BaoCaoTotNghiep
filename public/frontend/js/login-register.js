@@ -59,13 +59,13 @@ function loginAjax(){
     // $("#loginModal").submit(function (objEvent) {
     //     objEvent.preventDefault();
     // })
-     shakeModal().preventDefault();
+     shakeModal();
 
 }
 
 function shakeModal(){
     $('#loginModal .modal-dialog').addClass('shake');
-             $('.error').addClass('alert alert-danger').html("Invalid email/password combination");
+             $('.error').addClass('alert alert-danger').html("Không được bỏ trống");
 
              $('input[type="password"]').val('');
              setTimeout( function(){ 

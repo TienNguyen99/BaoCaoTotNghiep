@@ -24,13 +24,13 @@
                                 <h3>{{$value->namef}}</h3>
                                 <span>{{$value-> director}}</span>
                                                  <div class="anime__details__rating">
-                                <div class="rating">
+                                <!-- <div class="rating">
                                     <a href="#"><i class="fa fa-star"></i></a>
                                     <a href="#"><i class="fa fa-star"></i></a>
                                     <a href="#"><i class="fa fa-star"></i></a>
                                     <a href="#"><i class="fa fa-star"></i></a>
                                     <a href="#"><i class="fa fa-star-half-o"></i></a>
-                                </div>
+                                </div> -->
                                 
                             </div>
                             </div>
@@ -52,8 +52,7 @@
                                             <!-- <li><span>Scores:</span> 7.31 / 1,515</li> -->
                                             <li><span>Đánh giá:</span> {{$value ->rate}} Sao</li>
                                             <li><span>Thời lượng:</span> {{$value -> duration}}</li>
-                                            <li><span>Chất lượng:</span> HD</li>
-                                            <li><span>Lượt xem:</span> {{$value->count_view}}</li>
+                                            
                                         </ul>
                                     </div>
                                 </div>
@@ -79,7 +78,7 @@
                                     <img src="{{Voyager::Image($chitiet->avatar)}}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
-                                    <h6>{{$chitiet->fullname}} - <span>{{$chitiet->created_at}}</span></h6>
+                                    <h6>{{$chitiet->fullname}} - <span>{{Carbon\Carbon::parse($chitiet->created_at)->diffForHumans()}}</span></h6>
                                     <p>{{$chitiet->comment}}</p>
                                 </div>
                             </div>    
@@ -89,12 +88,24 @@
                         </div>
                         <div class="anime__details__form">
                             <div class="section-title">
-                                <h5>Your Comment</h5>
+                                <h5>Bình luận</h5>
                             </div>
-                            <form action="#">
-                                <textarea placeholder="Your Comment"></textarea>
+                            <?php if (Auth::guard('customers')->check()): ?>
+                                <form action="{{route('custom.comment')}}" method="post">
+                                @csrf
+                                <input type="hidden" name="film_id" value="{{$value->film_idF}}">
+                                <input type="hidden" name="cus_name" value="{{Auth::guard('customers')->user()->customer_name}}" >
+                                <input type="hidden" name="cus_avatar" value="{{Auth::guard('customers')->user()->customer_avatar}}">
+                                <input type="hidden" name="cus_status" value="1">
+                                <textarea placeholder="Your Comment" name="cus_comment"></textarea>
                                 <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
-                            </form>
+                            </form>  
+                            <?php else: ?>
+                                <div>
+                                    <textarea readonly style= " text-align: center;background-color: white;width: 100%; readonly"> Vui lòng đăng nhập để được bình luận</textarea>
+                                </div>
+                            <?php endif ?>
+
                         </div>
                     </div>
          

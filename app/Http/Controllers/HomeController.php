@@ -18,10 +18,27 @@ class HomeController extends Controller
         // $Phims = array();
     	$Phims = DB::table('film')
         ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
-        ->join('Feedback', 'film.status','=','Feedback.status')
-        ->where('film.status','1')
+        ->join('Feedback', 'film.filid','=','Feedback.film_idF')
+        
+        ->where([
+    ['film.status', '=', '1'],
+    ['film.film_showing', '=', '1'],
+        ])
+        ->limit(3)
+        ->orderBy('film.created_at','desc')
         ->get();
-
+        $Phimsupcoming = DB::table('film')
+        ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
+        ->join('Feedback', 'film.filid','=','Feedback.film_idF')
+        
+        ->where([
+    ['film.status', '=', '1'],
+    ['film.film_upcoming', '=', '1'],
+        ])
+        ->limit(3)
+        ->orderBy('film.created_at','desc')
+        ->get();
+            
         
         
         //Slider
@@ -63,7 +80,7 @@ class HomeController extends Controller
         //Dang ky
 
 
-    	return view('pages.home')->with(compact("Phims"))->with(compact('sliders'));
+    	return view('pages.home')->with(compact("Phims"))->with(compact('sliders'))->with(compact('Phimsupcoming'));
     }
     public function test(){
         $Phims = DB::table('film')
@@ -159,14 +176,10 @@ class HomeController extends Controller
         }
         public function postDangxuat(Request $req){
             Auth::guard('customers')->logout();
-            return redirect()->route('index');
+            return redirect()->route('index')->with('success','Đăng xuất thành công');
         }
         public function getSearch(Request $req){
-        $Phims = DB::table('film')
-        ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
-        ->join('Feedback', 'film.status','=','Feedback.status')
-        ->where('film.status','1')
-        ->get();
+        
 
         
         //Slider
@@ -175,11 +188,11 @@ class HomeController extends Controller
         ->get();
         $film = DB::table('film')
         ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
-        ->join('Feedback', 'film.status','=','Feedback.status')
+        ->join('Feedback', 'film.filid','=','Feedback.film_idF')
         ->where('namef','like','%'.$req->key.'%')
         ->orWhere('namet','like','%'.$req->key.'%')
         ->get();
-            return view('pages.search')->with(compact('film'))->with(compact('Phims'))->with(compact('sliders'));
+            return view('pages.search')->with(compact('film'))->with(compact('sliders'));
         }
 
 }

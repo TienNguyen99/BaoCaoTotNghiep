@@ -28,6 +28,8 @@
     <link rel="stylesheet" href="{{asset('public/frontend/css/slicknav.min.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('public/frontend/css/login-register.css')}}" type="text/css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
     <!-- <link href="{{asset('public/frontend/css/stylebooking.css')}}" rel="stylesheet" type="text/css" media="all" /> -->
 
 </head>
@@ -54,13 +56,13 @@
                                 <li class="active"><a href="{{URL::to('/trang-chu')}}">Mua vé</a></li>
                                 <li><a href="./categories.html">Điện ảnh <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
-                                        <li><a href="./categories.html">Thể loại</a></li>
-                                        <li><a href="./anime-details.html">Diễn viên</a></li>
-                                        <li><a href="./anime-watching.html">Đạo diễn</a></li>
-                                        <li><a href="./blog-details.html">Rạp chiếu phim</a></li>
+                                        <li><a href="#">Thể loại</a></li>
+                                        <li><a href="#">Diễn viên</a></li>
+                                        <li><a href="#">Đạo diễn</a></li>
+                                        <li><a href="#">Rạp chiếu phim</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#">Rạp phim</a></li>
+                                <li><a href="#" id ="locationModal">Rạp phim</a></li>
                                 
                                 
                             </ul>
@@ -72,9 +74,10 @@
 
                         <?php if (Auth::guard('customers')->check()): ?>
                             <nav class="header__menu mobile-menu">
-                                <ul>    <li><a href="" >Chào bạn,{{Auth::guard('customers')->user()->customer_name}}  <span class="arrow_carrot-down"></span></a>
+
+                                <ul> <a href="#" class="search-switch"><span class="icon_search"></span></a>   <li><a href="" >Chào bạn,{{Auth::guard('customers')->user()->customer_name}}  <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
-                                        <li><a href="#" >Thông tin tài khoản</a></li>
+                                        <li><a href="{{route('custom.profile')}}" >Thông tin tài khoản</a></li>
                                         <li><a href= "{{route('custom.logout')}}">Đăng xuất</a></li>
 
                                     </ul>
@@ -149,16 +152,16 @@
                                 <li data-filter=".month">Tháng</li>
                                 <li data-filter=".years">Năm</li>
                             </ul>
-                            <?php foreach ($Phims as $key => $phim): ?>
+                            
                                 <div class="filter__gallery">
                                     <div class="product__sidebar__view__item  mix day years">
-                                        <img src="{{asset('storage/app/public/'.$phim->picture)}}" height="100%" width="100%">
+                                        <img src="" height="100%" width="100%">
 
                                         <div class="ep">18 / ?</div>
-                                        <div class="view"><i class="fa fa-eye"></i> {{$phim->count_view}}</div>
-                                        <h5><a href="#">{{$phim->namef}}</a></h5>
+                                        <div class="view"><i class="fa fa-eye"></i> </div>
+                                        <h5><a href="#"></a></h5>
                                     </div>
-                            <?php endforeach ?>
+                            
 
 
 
@@ -209,15 +212,15 @@
                 <div class="footer__nav">
                     <ul>
                         <li class="active"><a href="./index.html">TRANG CHỦ</a></li>
-                        <li><a href="./categories.html">DANH SÁCH PHIM</a></li>
-                        <li><a href="./blog.html">BLOG</a></li>
+                        <li><a href="#">DANH SÁCH PHIM</a></li>
+                        <li><a href="#">BLOG</a></li>
                         <li><a href="#">LIÊN HỆ</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-lg-3">
                 <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                  Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Website đồ án Đặt vé xem phim Binh An Cinema <i class="fa fa-heart" aria-hidden="true"></i> by <a href="javascript:" target="_blank">Nguyễn Minh Tiến D17PM03</a>
                   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 
               </div>
@@ -276,7 +279,7 @@
                                 <?php endif ?>
                                     <input id="email" class="form-control" type="text" placeholder="Email" name="email">
                                     <input id="password" class="form-control" type="password" placeholder="Mật khẩu" name="password">
-                                    <input class="btn btn-default btn-login" type="submit" value="Đăng nhập" onclick="loginAjax()" >
+                                    <input class="btn btn-default btn-login" type="submit" value="Đăng nhập"  >
                                     </form>
                                 </div>
                              </div>
@@ -326,16 +329,11 @@
                   </div>
               </div>
           </div>
-    
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        openLoginModal();
-    });
-</script>
 
 
-@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
+
+
+
 <!-- End login/register Modal-->
 <!-- Js Plugins -->
 <script src="{{asset('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
@@ -348,8 +346,18 @@
 <script src="{{asset('public/frontend/js/main.js')}}"></script>
 <script src="{{asset('public/frontend/js/login-register.js')}}"></script>
 
+<!-- Location Cinema Modal -->    
+<script type="text/javascript">
+$( "#locationModal" ).click(function() {
+    swal({  title:'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1958.9182267735507!2d106.83360608582798!3d10.900030999160187!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDU0JzAwLjEiTiAxMDbCsDUwJzAzLjYiRQ!5e0!3m2!1svi!2s!4v1616490481837!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>'});
 
+});
+
+</script>
+
+<!-- End LCM -->
 <script src="{{asset('public/frontend/js/jquery.seat-charts.js')}}"></script>
+@include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 </body>
 
 </html>

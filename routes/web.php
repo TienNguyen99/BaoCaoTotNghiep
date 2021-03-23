@@ -28,8 +28,12 @@ Route::get('/logout','HomeController@postDangxuat')->name('custom.logout');
 //
 Route::get('/detail/{filid}','DetailController@detail_film');
 //Tim kiem
-
 Route::get('/search','HomeController@getSearch')->name('search');
+//Comment Review
+Route::post('/post-comment','DetailController@postComment')->name('custom.comment');
+//Profile Customer
+Route::get('/profile','ProfileController@index')->name('custom.profile');
+
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
