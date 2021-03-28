@@ -72,14 +72,14 @@
                             <div class="section-title">
                                 <h5>Reviews</h5>
                             </div>
-                            <?php foreach ($chitiet_film as $key => $chitiet): ?>
+                            <?php foreach ($feedbacks as $key => $feed): ?>
                             <div class="anime__review__item">
                                 <div class="anime__review__item__pic">
-                                    <img src="{{Voyager::Image($chitiet->avatar)}}" alt="">
+                                    <img src="{{Voyager::Image($feed->avatar)}}" alt="">
                                 </div>
                                 <div class="anime__review__item__text">
-                                    <h6>{{$chitiet->fullname}} - <span>{{Carbon\Carbon::parse($chitiet->created_at)->diffForHumans()}}</span></h6>
-                                    <p>{{$chitiet->comment}}</p>
+                                    <h6>{{$feed->fullname}} - <span>{{Carbon\Carbon::parse($feed->created_at)->diffForHumans()}}</span></h6>
+                                    <p>{{$feed->comment}}</p>
                                 </div>
                             </div>    
                             <?php endforeach ?>

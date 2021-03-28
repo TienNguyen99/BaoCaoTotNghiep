@@ -70,7 +70,7 @@
                 background-repeat: no-repeat;
                 background-size: cover;
                 background-position: top center;">
-                    <div class="ep">Đánh giá {{$phim->rate}} / 5</div>
+                    <div class="ep">Đánh giá {{$phimup->rate}} / 5</div>
                     <div class="comment"><i class="fa fa-comments"></i> 11</div>
                     <div class="view"><i class="fa fa-eye"></i> 9141</div>
                 </div>
@@ -79,7 +79,7 @@
                         <li>{{$phimup->namet}}</li>
                         
                     </ul>
-                    <h5><a href="{{URL::to('/detail/'.$phim->filid)}}">{{$phimup->namef}}</a></h5>
+                    <h5><a href="{{URL::to('/detail/'.$phimup->filid)}}">{{$phimup->namef}}</a></h5>
                 </div>
             </div>
         </div>            

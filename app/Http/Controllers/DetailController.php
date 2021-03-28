@@ -16,11 +16,7 @@ class DetailController extends Controller
 {
 
     public function detail_film($filid){
-		$Phims = DB::table('film')
-		->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
-		->join('Feedback', 'film.filid','=','Feedback.film_idF')
-		->where('film.status','1')
-		->get();
+		
 
 		$sliders = db::table('slider')
         ->where('slider_status','1')
@@ -36,7 +32,21 @@ class DetailController extends Controller
 		->limit(1)
 		->where('film.filid',$filid)
 		->get();
-		return view('pages.detail')->with(compact('Phims'))->with(compact('chitiet_film'))->with(compact('sliders'));
+		$feedbacks = DB::table('film')
+		->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
+		->join('Feedback', 'film.filid','=','Feedback.film_idF')
+		
+		->where('film.filid',$filid)
+		->get();
+        $phimhots = DB::table('film')
+        ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
+        ->join('Feedback', 'film.filid','=','Feedback.film_idF')
+        ->groupBy('filid','film_idF')
+        ->where('film.status','1')
+        ->limit(5)
+        ->orderBy('film.created_at','desc')
+        ->get();
+		return view('pages.detail')->with(compact('Phims'))->with(compact('chitiet_film'))->with(compact('sliders'))->with(compact('feedbacks'))->with(compact('phimhots'));
     }
     public function postComment(Request $req)
     {

@@ -16,7 +16,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 */
 
 Route::get('/','HomeController@index');
-Route::get('/test','HomeController@test');
+Route::get('/test/{filid}','HomeController@test');
 Route::post('/dangky','HomeController@dangkytest')->name('custom.dangkytest');
 Route::get('/trang-chu','HomeController@index')->name('index');
 

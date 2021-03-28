@@ -21,7 +21,14 @@ class ProfileController extends Controller
         ->where('film.status','1')
         ->get();
         
-        
+        $phimhots = DB::table('film')
+        ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
+        ->join('Feedback', 'film.filid','=','Feedback.film_idF')
+        ->groupBy('filid','film_idF')
+        ->where('film.status','1')
+        ->limit(5)
+        ->orderBy('film.created_at','desc')
+        ->get();
         
         
         //Slider
@@ -63,6 +70,6 @@ class ProfileController extends Controller
         //Dang ky
 
 
-    	return view('pages.customer_profile')->with(compact("Phims"))->with(compact('sliders'))->with(compact('customers'));
+    	return view('pages.customer_profile')->with(compact("Phims"))->with(compact('sliders'))->with(compact('customers'))->with(compact('phimhots'));
     }
 }

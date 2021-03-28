@@ -54,7 +54,7 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li class="active"><a href="{{URL::to('/trang-chu')}}">Mua vé</a></li>
-                                <li><a href="./categories.html">Điện ảnh <span class="arrow_carrot-down"></span></a>
+                                <li><a href="#">Điện ảnh <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="#">Thể loại</a></li>
                                         <li><a href="#">Diễn viên</a></li>
@@ -154,19 +154,19 @@
                             </ul>
                             
                                 <div class="filter__gallery">
-                                    <div class="product__sidebar__view__item  mix day years">
-                                        <img src="" height="100%" width="100%">
-
-                                        <div class="ep">18 / ?</div>
+                                    <?php foreach ($phimhots as $key => $phimhot): ?>
+                                    <div class="product__sidebar__view__item  mix {{$phimhot->film_hotby}} " >
+                                        <img src="{{Voyager::Image($phimhot->picture)}}" width="100%" height="100%">
+                                        <div class="ep">{{$phimhot->rate}}</div>
                                         <div class="view"><i class="fa fa-eye"></i> </div>
-                                        <h5><a href="#"></a></h5>
-                                    </div>
-                            
+                                        <h5><a href="{{URL::to('/detail/'.$phimhot->filid)}}">{{$phimhot->namef}}</a></h5>
+                                    </div>    
+                                    <?php endforeach ?>
+                                    
 
+                                    
 
-
-
-</div>
+                                </div>
 
 
 </div>
@@ -211,7 +211,7 @@
             <div class="col-lg-6">
                 <div class="footer__nav">
                     <ul>
-                        <li class="active"><a href="./index.html">TRANG CHỦ</a></li>
+                        <li class="active"><a href="{{URL::to('/trang-chu')}}">TRANG CHỦ</a></li>
                         <li><a href="#">DANH SÁCH PHIM</a></li>
                         <li><a href="#">BLOG</a></li>
                         <li><a href="#">LIÊN HỆ</a></li>

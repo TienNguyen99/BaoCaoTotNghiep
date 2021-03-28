@@ -24,13 +24,15 @@ class HomeController extends Controller
     ['film.status', '=', '1'],
     ['film.film_showing', '=', '1'],
         ])
-        ->limit(3)
+        ->groupBy('filid','film_idF')
         ->orderBy('film.created_at','desc')
+        ->distinct()
         ->get();
+        
         $Phimsupcoming = DB::table('film')
         ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
         ->join('Feedback', 'film.filid','=','Feedback.film_idF')
-        
+        ->groupBy('filid','film_idF')
         ->where([
     ['film.status', '=', '1'],
     ['film.film_upcoming', '=', '1'],
@@ -45,6 +47,15 @@ class HomeController extends Controller
         $sliders = db::table('slider')
         ->where('slider_status','1')
         ->get();
+        $phimhots = DB::table('film')
+        ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
+        ->join('Feedback', 'film.filid','=','Feedback.film_idF')
+        ->groupBy('filid','film_idF')
+        ->where('film.status','1')
+        ->limit(5)
+        ->orderBy('film.created_at','desc')
+        ->get();
+
         //Phim ngay
         // $phimngays = db::table('film')
         // ->where('status','1')
@@ -80,7 +91,7 @@ class HomeController extends Controller
         //Dang ky
 
 
-    	return view('pages.home')->with(compact("Phims"))->with(compact('sliders'))->with(compact('Phimsupcoming'));
+    	return view('pages.home')->with(compact("Phims"))->with(compact('sliders'))->with(compact('Phimsupcoming'))->with(compact('phimhots'));
     }
     public function test(){
         $Phims = DB::table('film')
@@ -91,6 +102,7 @@ class HomeController extends Controller
         ->get();
         return view('pages.test')->with(compact('Phims'))->with(compact('comment'));
     }
+
     public function dangkytest(Request $req){
 
             $customer = new Customer();
@@ -125,7 +137,7 @@ class HomeController extends Controller
             // );
 
             $validator = Validator::make($req->all(),
-                ['email' => 'required|email|unique:customer,customer_email' ,
+                ['email' => 'required|email|unique:customer,email' ,
                  'password' =>'required|min:6|max:20',
                  'fullname'=>'required',
                  're_password'=>'required|same:password'
@@ -191,8 +203,17 @@ class HomeController extends Controller
         ->join('Feedback', 'film.filid','=','Feedback.film_idF')
         ->where('namef','like','%'.$req->key.'%')
         ->orWhere('namet','like','%'.$req->key.'%')
+        ->groupBy('filid','film_idF')
         ->get();
-            return view('pages.search')->with(compact('film'))->with(compact('sliders'));
+        $phimhots = DB::table('film')
+        ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
+        ->join('Feedback', 'film.filid','=','Feedback.film_idF')
+        ->groupBy('filid','film_idF')
+        ->where('film.status','1')
+        ->limit(5)
+        ->orderBy('film.created_at','desc')
+        ->get();
+            return view('pages.search')->with(compact('film'))->with(compact('sliders'))->with(compact('phimhots'));
         }
 
 }
