@@ -113,7 +113,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     
         </div>
         <div class="table-responsive">
-            <table class="table table-bordered">
+            <form method="post" action="{{ route('custom.booking')}}">
+                @csrf
+                <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -126,13 +128,18 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <% _.each(items,function(item){%>
                             <tr>
                                 <td><%-item.names%></td>
+                                <input type="hidden" name="fullname" value ="<%-item.names%>">
                                 <td><%-item.numbers%></td>
                                 <td><%-item.seats%></td>
                             </tr>
                         <%})%>
                     </script>
                 </tbody>
-            </table>
+
+            </table>  
+            <input class="btn btn-default btn-register" type="submit" value="Đăng ký" name="commit">
+            </form>
+
         </div>
 <script type="text/javascript">
     

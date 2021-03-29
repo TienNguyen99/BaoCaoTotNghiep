@@ -93,14 +93,16 @@ class HomeController extends Controller
 
     	return view('pages.home')->with(compact("Phims"))->with(compact('sliders'))->with(compact('Phimsupcoming'))->with(compact('phimhots'));
     }
-    public function test(){
-        $Phims = DB::table('film')
+    public function test($filid){
+        $chitiet_films = DB::table('film')
         ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
         ->join('Feedback', 'film.status','=','Feedback.status')
         ->join('Showtime', 'film.filid','=','Showtime.showtime_id')
-        ->where('film.status','1')
+        ->limit(1)
+        ->orWhere('film.filid',$filid)
+        ->groupBy('filid','film_idF')
         ->get();
-        return view('pages.test')->with(compact('Phims'))->with(compact('comment'));
+        return view('pages.test')->with(compact('chitiet_films'));
     }
 
     public function dangkytest(Request $req){

@@ -8,11 +8,14 @@
 			<div class="card-body" style="padding-top: 100%">
 				<div class="account-settings" >
 										<div class="user-profile">
-						<h5 class="user-name">Xin chào ,{{Auth::guard('customers')->user()->customer_name}}</h5>					
-						<div class="user-avatar">
-							<img src="{{asset('storage/app/public/'.Auth::guard('customers')->user()->customer_avatar)}}" alt="Profile Avatar">
-						</div>
+						<h5 class="user-name">Xin chào ,{{Auth::guard('customers')->user()->customer_name}}</h5>	
+										
 						
+						<?php if (Auth::guard('customers')->user()->customer_avatar): ?>
+							<img class="image rounded-circle" src="{{asset('storage/app/public/'.Auth::guard('customers')->user()->customer_avatar)}}" alt="profile_image" style="width: 100px;height: 80px; padding: 10px; margin: 0px; ">
+						<?php else: ?>
+							<img class="image rounded-circle" src="{{asset('storage/app/public/customer/March2021/defaultuser.png')}}" alt="profile_image" style="width: 100px;height: 80px; padding: 10px; margin: 0px; ">
+						<?php endif ?>
 						<!-- <h6 class="user-email">yuki@Maxwell.com</h6> -->
 					</div>
 				</div>

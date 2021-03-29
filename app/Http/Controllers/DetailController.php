@@ -29,7 +29,7 @@ class DetailController extends Controller
 		$chitiet_film = DB::table('film')
 		->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
 		->join('Feedback', 'film.filid','=','Feedback.film_idF')
-		->limit(1)
+		->groupBy('filid','film_idF')
 		->where('film.filid',$filid)
 		->get();
 		$feedbacks = DB::table('film')
@@ -48,6 +48,7 @@ class DetailController extends Controller
         ->get();
 		return view('pages.detail')->with(compact('Phims'))->with(compact('chitiet_film'))->with(compact('sliders'))->with(compact('feedbacks'))->with(compact('phimhots'));
     }
+
     public function postComment(Request $req)
     {
     // $validatedData = $request->validate([

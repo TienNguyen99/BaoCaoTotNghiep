@@ -31,7 +31,70 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
     <!-- <link href="{{asset('public/frontend/css/stylebooking.css')}}" rel="stylesheet" type="text/css" media="all" /> -->
+<style type="text/css">
+    .ratings {
+    bottom: 4px;
+    position: relative
+}
 
+.ratings i {
+    color: #aba8a88c
+}
+
+.listing {
+    background: #eee
+}
+
+.modal-content {
+    border: none
+}
+
+.listing-child {
+    background: #00000012
+}
+
+.room-spec span {
+    margin-right: 10px;
+    font-size: 12px
+}
+
+.spec-text-color {
+    color: #8bc34a;
+    font-weight: 800
+}
+
+.info span {
+    margin-right: 10px
+}
+
+.more {
+    text-decoration: none;
+    font-size: 15px
+}
+
+.info span i {
+    font-size: 12px;
+    color: #9e9e9e8f !important
+}
+
+.spec span {
+    margin-right: 10px
+}
+
+.date {
+    line-height: 17px;
+    margin-bottom: 8px
+}
+
+.date-o {
+    color: green
+}
+
+.booking {
+    padding-left: 150px !important;
+    padding-right: 150px !important
+}
+</style>
 </head>
 
 <body>
@@ -70,7 +133,7 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="header__right" style="padding: 5px">
+                    <div class="header__right">
 
                         <?php if (Auth::guard('customers')->check()): ?>
                             <nav class="header__menu mobile-menu">
@@ -102,98 +165,34 @@
 
     <!-- Hero Section Begin -->
 
-    <section class="hero">
-        <div class="container">
-            <div class="hero__slider owl-carousel">
 
-                <?php foreach ($sliders as $key => $slider): ?>
-                <div class="hero__items " style="background-image: url('{{Voyager::Image($slider->slider_image)}}'); background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top center;">
-                    
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-
-                                <h2>&nbsp;</h2>
-                                <p>&nbsp;</p>
-                                <a href="#"><span>Xem chi tiết</span> <i class="fa fa-angle-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php endforeach ?>
-            </div>
-        </div>
-    </section>
     <!-- Hero Section End -->
 
     <!-- Product Section Begin -->
-    <section class="product spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-
-
-                    @yield('content')
-
-
-
+    <div class="container mt-5 d-flex justify-content-center"> <button type="button" class="btn btn-danger px-5" data-toggle="modal" data-target="#exampleModal"> Book Hotel </button> </div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-top: 25%">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="bg-white p-2 px-3 border-bottom">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-between align-items-center">   
+                                <button class="d-flex flex-row align-items-center">
+                                    <h2 class="date-o">24</h2>
+                                    <div class="d-flex flex-column ml-2 date"> <span>July 20</span> <span>Friday</span> </div>
+                                </button>
+                        </div>
+                    </div>
+                    
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="product__sidebar">
-                        <div class="product__sidebar__view">
-                            <div class="section-title">
-                                <h5>Phim HOT</h5>
-                            </div>
-                            <ul class="filter__controls">
-                                <li class="active" data-filter="*">Ngày</li>
-                                <li data-filter=".week">Tuần</li>
-                                <li data-filter=".month">Tháng</li>
-                                <li data-filter=".years">Năm</li>
-                            </ul>
-                            
-                                <div class="filter__gallery">
-                                    <?php foreach ($phimhots as $key => $phimhot): ?>
-                                    <div class="product__sidebar__view__item  mix {{$phimhot->film_hotby}} " >
-                                        <img src="{{Voyager::Image($phimhot->picture)}}" width="100%" height="100%">
-                                        <div class="ep">{{$phimhot->rate}}</div>
-                                        <div class="view"><i class="fa fa-eye"></i> </div>
-                                        <h5><a href="{{URL::to('/detail/'.$phimhot->filid)}}">{{$phimhot->namef}}</a></h5>
-                                    </div>    
-                                    <?php endforeach ?>
-                                    
-
-                                    
-
-                                </div>
-
-
-</div>
-<div class="product__sidebar__comment">
-    <div class="section-title">
-        <h5>Bình Luận mới nhất</h5>
-    </div>
-    <div class="product__sidebar__comment__item">
-        <div class="product__sidebar__comment__item__pic">
-            <img src="img/sidebar/comment-1.jpg" alt="">
-        </div>
-        <div class="product__sidebar__comment__item__text">
-            <ul>
-                <li>Active</li>
-                <li>Movie</li>
-            </ul>
-            <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-            <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
+            </div>
+            <div class="complete p-3 mt-2">
+                
+                <div class="text-center mt-4 mb-4"> <button class="btn btn-danger booking">Complete Booking</button> </div>
+            </div>
         </div>
     </div>
-
 </div>
-</div>
-</div>
-</div>
-</div>
-</section>
 <!-- Product Section End -->
 
 <!-- Footer Section Begin -->
@@ -356,7 +355,7 @@ $( "#locationModal" ).click(function() {
 </script>
 
 <!-- End LCM -->
-<script src="{{asset('public/frontend/js/jquery.seat-charts.js')}}"></script>
+
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 </body>
 

@@ -5,7 +5,19 @@
         <div class="loader"></div>
     </div>
 <?php foreach ($chitiet_film as $key => $value): ?>
-    
+        <div class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__links">
+                        <a href="{{URL::to('/trang-chu')}}"><i class="fa fa-home"></i>Mua vé</a>
+                        <a href="#">Categories</a>
+                        <span>{{$value->namet}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>  
   <section class="anime-details spad">
         <div class="container">
             <div class="anime__details__content">
@@ -59,7 +71,7 @@
                             </div>
                             <div class="anime__details__btn">
                                 <a href="#trailerModal" class="follow-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/Jfrjeg26Cwk" ><i class="fa fa-heart-o"></i> Trailer</a>
-                                <a href="#bookingModal" class="watch-btn" data-toggle ="modal" data-tartget ="#bookingModal"><span>Đặt vé</span> <i
+                                <a href="#" class="watch-btn" data-toggle="modal" data-target="#bookingModal"><span>Đặt vé</span> <i
                                     class="fa fa-angle-right"></i></a>
                                 </div>
                             </div>
@@ -67,7 +79,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-8 col-md-8">
+                    <div class="col-lg-12">
                         <div class="anime__details__review">
                             <div class="section-title">
                                 <h5>Reviews</h5>
@@ -115,6 +127,30 @@
         </section>
         <!-- Anime Section End -->
 <!-- Modal -->
+<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-top: 25%">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="bg-white p-2 px-3 border-bottom">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="d-flex justify-content-between align-items-center">   
+                                <button class="d-flex flex-row align-items-center">
+                                    <h2 class="date-o">24</h2>
+                                    <div class="d-flex flex-column ml-2 date"> <span>July 20</span> <span>Friday</span> </div>
+                                </button>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="complete p-3 mt-2">
+                
+                <div class="text-center mt-4 mb-4"> <button class="btn btn-danger booking">Complete Booking</button> </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End booking modal-->
 <div class="modal fade" id="trailerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-top: 25%">
   <div class="modal-dialog" role="document" style="      max-width: 800px;margin: 30px auto;">
     <div class="modal-content">

@@ -1,5 +1,7 @@
 @extends('layout')
+
 @section('content')
+
 <div class="trending__product">
     <div class="row">
         <div class="col-lg-8 col-md-8 col-sm-8">
