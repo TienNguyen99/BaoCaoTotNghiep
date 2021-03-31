@@ -332,9 +332,7 @@ ol {
 	background: #070720;
 }
 
-.header__logo {
-	padding: 20px 0 17px;
-}
+
 
 .header__logo a {
 	display: inline-block;
@@ -433,7 +431,8 @@ ol {
 
 .header__right a:last-child {
 	margin-right: 0;
-	padding-top: 15px;
+	padding-top: 20px;
+	padding-right: 50px;
 }
 
 

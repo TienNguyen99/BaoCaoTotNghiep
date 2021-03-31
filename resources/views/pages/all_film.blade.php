@@ -36,20 +36,22 @@
 
 <body>
     <!-- Page Preloder -->
-
+        <div id="preloder">
+        <div class="loader"></div>
+    </div>
 
     <!-- Header Section Begin -->
     <header class="header">
         <div class="container">
             <div class="row">
-                <div class="col-lg-2">
+<!--                 <div class="col-lg-2">
                     <div class="header__logo">
-                        <a href="{{URL::to('/trang-chu')}}">
-                            <img src="{{asset('public/storage/logo.jpg')}}" alt="">
+                        <a href="./index.html">
+                            <img src="{{'img/logo.png'}}" alt="">
                         </a>
                     </div>
-                </div>
-                <div class="col-lg-6">
+                </div> -->
+                <div class="col-lg-8">
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
@@ -70,12 +72,12 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="header__right" >
+                    <div class="header__right" style="padding: 5px">
 
                         <?php if (Auth::guard('customers')->check()): ?>
                             <nav class="header__menu mobile-menu">
 
-                                <ul> <a href="#" class="search-switch"><span class="icon_search" style="color: #b7b7b7; display:block;font-weight: 700;"></span></a>   <li><a href="" >Chào bạn,{{Auth::guard('customers')->user()->customer_name}}  <span class="arrow_carrot-down"></span></a>
+                                <ul> <a href="#" class="search-switch"><span class="icon_search"></span></a>   <li><a href="" >Chào bạn,{{Auth::guard('customers')->user()->customer_name}}  <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="{{route('custom.profile')}}" >Thông tin tài khoản</a></li>
                                         <li><a href= "{{route('custom.logout')}}">Đăng xuất</a></li>
@@ -102,98 +104,83 @@
 
     <!-- Hero Section Begin -->
 
-    <section class="hero">
+
+    <!-- Hero Section End -->
+    
+ <section class="product spad">
         <div class="container">
-            <div class="hero__slider owl-carousel">
+            
 
-                <?php foreach ($sliders as $key => $slider): ?>
-                <div class="hero__items " style="background-image: url('{{Voyager::Image($slider->slider_image)}}'); background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top center;">
-                    
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
 
-                                <h2>&nbsp;</h2>
-                                <p>&nbsp;</p>
-                                <a href="#"><span>Xem chi tiết</span> <i class="fa fa-angle-right"></i></a>
+            <div class="row">
+<div class="col-lg-12">
+                    <div class="product__page__content">
+                        <div class="product__page__title">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-6">
+                                    <div class="section-title">
+                                        <h4>Tất cả Phim</h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6">
+                                    <div class="product__page__filter">
+                                        <p>Sắp xếp:</p>
+                                        <select name="sortBy">
+                                            <option value="1">A-Z</option>
+                                            <option value="2">1-10</option>
+                                            <option value="3">10-50</option>
+                                        </select>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        
+                            <div class="row">
+                                <?php foreach ($phimhots as $key => $phim): ?>
+                            <div class="col-sm-3">
+
+                                <div class="product__item">
+                <div class="product__item__pic" style="
+                background-image: url('{{Voyager::Image($phim->picture)}}'); 
+                background-repeat: no-repeat;
+                background-size: cover;
+                background-position: top center;">
+                    <div class="ep">Đánh giá {{$phim->rate}} / 5</div>
+                    <div class="comment"><i class="fa fa-comments"></i> </div>
+                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
                 </div>
-                <?php endforeach ?>
-            </div>
-        </div>
-    </section>
-    <!-- Hero Section End -->
-
-    <!-- Product Section Begin -->
-    <section class="product spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-
-
-                    @yield('content')
-
-
-
+                <div class="product__item__text">
+                    <ul>
+                        <li>{{$phim-> namet}}</li>
+                        
+                    </ul>
+                    <h5><a href="{{URL::to('/detail/'.$phim->filid)}}">{{$phim->namef}}</a></h5>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-8">
-                    <div class="product__sidebar">
-                        <div class="product__sidebar__view">
-                            <div class="section-title">
-                                <h5>Phim HOT</h5>
-                            </div>
-                            <ul class="filter__controls">
-                                <li class="active" data-filter="*">Ngày</li>
-                                <li data-filter=".week">Tuần</li>
-                                <li data-filter=".month">Tháng</li>
-                                <li data-filter=".years">Năm</li>
-                            </ul>
-                            
-                                <div class="filter__gallery">
-                                    <?php foreach ($phimhots as $key => $phimhot): ?>
-                                    <div class="product__sidebar__view__item  mix {{$phimhot->film_hotby}} " >
-                                        <img src="{{Voyager::Image($phimhot->picture)}}" width="100%" height="100%">
-                                        <div class="ep">{{$phimhot->rate}}</div>
-                                        <div class="view"><i class="fa fa-eye"></i> </div>
-                                        <h5><a href="{{URL::to('/detail/'.$phimhot->filid)}}">{{$phimhot->namef}}</a></h5>
-                                    </div>    
-                                    <?php endforeach ?>
-                                    
-
-                                    
-
                                 </div>
 
+    
+
+                            </div>
+<?php endforeach ?>
+                        </div>
+                    </div>
+                    <div class="product__pagination">
+                        <a href="#" class="current-page">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#"><i class="fa fa-angle-double-right"></i></a>
+                    </div> 
+
+                </div>
 
 </div>
-<!-- <div class="product__sidebar__comment">
-    <div class="section-title">
-        <h5>Bình Luận mới nhất</h5>
-    </div>
-    <div class="product__sidebar__comment__item">
-        <div class="product__sidebar__comment__item__pic">
-            <img src="img/sidebar/comment-1.jpg" alt="">
-        </div>
-        <div class="product__sidebar__comment__item__text">
-            <ul>
-                <li>Active</li>
-                <li>Movie</li>
-            </ul>
-            <h5><a href="#">The Seven Deadly Sins: Wrath of the Gods</a></h5>
-            <span><i class="fa fa-eye"></i> 19.141 Viewes</span>
-        </div>
-    </div>
-
-</div> -->
 </div>
-</div>
-</div>
-</div>
-</section>
+</section>  
+    
+    <!-- Product Section Begin -->
+   
 <!-- Product Section End -->
 
 <!-- Footer Section Begin -->
@@ -380,6 +367,7 @@ $( "#locationModal" ).click(function() {
         attribution="setup_tool"
         page_id="101335638730777">
       </div>
+
 @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 </body>
 

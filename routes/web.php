@@ -20,6 +20,8 @@ Route::get('/test/{filid}','HomeController@test');
 Route::get('/daybooking','BookingController@booking_form');
 Route::get('/trang-chu','HomeController@index')->name('index');
 
+//Xem tat ca phim
+Route::get('/tat-ca-phim','HomeController@seeall')->name('seeall');
 
 //Dang ky, dang nhap ,dang xuat
 Route::post('/register','HomeController@postDangky')->name('custom.register');

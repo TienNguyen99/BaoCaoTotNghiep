@@ -93,6 +93,23 @@ class HomeController extends Controller
 
     	return view('pages.home')->with(compact("Phims"))->with(compact('sliders'))->with(compact('Phimsupcoming'))->with(compact('phimhots'));
     }
+    public function seeall(){
+        $phimhots = DB::table('film')
+
+        
+        ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
+        ->join('Feedback', 'film.filid','=','Feedback.film_idF')
+        ->groupBy('filid','film_idF')
+        ->where('film.status','1')
+        
+        
+
+        ->get();
+        
+        $orderbyNames = Film::orderBy('namef')->get();
+        
+        return view('pages.all_film')->with(compact('phimhots'))->with(compact('orderbyNames'));
+    }
     public function test($filid){
         $chitiet_films = DB::table('film')
         ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
@@ -109,11 +126,7 @@ class HomeController extends Controller
 
             $customer = new Customer();
             $customer ->customer_name = $req->fullname;
-            $customer ->email = $req ->email;
-            $customer ->password = Hash::make($req ->password);
-            $customer ->customer_phone = $req ->phone;
-            $customer ->customer_address = $req ->address;
-            $customer ->customer_birth = $req ->birth;
+            
             $customer ->save();
                 
             

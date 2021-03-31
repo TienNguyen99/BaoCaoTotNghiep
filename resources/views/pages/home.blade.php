@@ -11,7 +11,7 @@
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4">
             <div class="btn__all">
-                <a href="#" class="primary-btn">Xem tất cả <span class="arrow_right"></span></a>
+                <a href="{{URL::to('/tat-ca-phim')}}" class="primary-btn">Xem tất cả <span class="arrow_right"></span></a>
             </div>
         </div>
     </div>
