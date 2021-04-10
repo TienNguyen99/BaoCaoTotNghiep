@@ -46,15 +46,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     <?php foreach ($chitiet_films as $key => $value): ?>
                 <form class='form-inline selectionForm'>
             <div class="form-group required">
-                <label for="name">Name:</label>
+                <label for="name">Tên:</label>
                 <input type="text" class="form-control" id='name' placeholder="Jane Doe" required="required"/>
             </div>
             <div class="form-group required">
-                <label for="seats">Number Of Seats:</label>
+                <label for="seats">Số ghế:</label>
                 <input type="number" id='seats' class="form-control" placeholder="3" required="required"/>
             </div>
-            <div class="text-center">
-                <button type="button" class="btn btn-primary btn-lg submitBtn" id="submitSelection">Start Selecting</button>
+            <div class="container" style="text-align: center;">
+                <button type="button" class="btn btn-primary btn-lg submitBtn" id="submitSelection">Chọn</button>
             </div>
             <div class="text-center">
                 <font color="Red"><label class="error"></label></font>
@@ -87,9 +87,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <td><%=row%></td>
                                 <% _.each(_.range(1,columns+1),function(column){ %>
                                     <% var id=(_.indexOf(rows,row)*columns)+column; var reservedSeats=JSON.parse(localStorage.getItem('ReservedSeats')); if(reservedSeats!=null && _.indexOf(reservedSeats,String(id))!=-1) {%>
-                                        <td><img src="img/reserved-seat.png" class="reserved-seat" id="<%=id%>"/></td>
+                                        <td><img src="{{asset('public/frontend/img/reserved-seat.png')}}" class="reserved-seat" id="<%=id%>"/></td>
                                     <% }else {%>
-                                        <td><img src="img/empty-seat.png" class="empty-seat" id="<%=id%>"/></td>               
+                                        <td><img src="{{asset('public/frontend/img/empty-seat.png')}}" class="empty-seat" id="<%=id%>"/></td>               
                                     <% }}) %>
                             </tr>
                         <% }) %>
@@ -100,14 +100,14 @@ License URL: http://creativecommons.org/licenses/by/3.0/
             <div class="text-center">
                 <button type="button" class="btn btn-primary btn-lg submitBtn" id="confirmSelection">Confirm Selection</button>
                 <div class="screen-map">
-                <label for="empty-seat-map">Selected Seat</label>
-                <img src="img/booked-seat.png" class="booked-seat-map" id="booked-seat-map">
+                <label for="empty-seat-map">Ghế đã chọn</label>
+                <img src="{{asset('public/frontend/img/booked-seat.png')}}" class="booked-seat-map" id="booked-seat-map">
                 <br/>
-                <label for="">Reserved Seat</label>
-                <img src="img/reserved-seat.png" class="reserved-seat-map" id="reserved-seat-map">
+                <label for="">Ghế đã đặt</label>
+                <img src="{{asset('public/frontend/img/reserved-seat.png')}}" class="reserved-seat-map" id="reserved-seat-map">
                 <br/>
-                <label for="">Empty Seat</label>
-                <img src="img/empty-seat.png" class="empty-seat-map" id="empty-seat-map">
+                <label for="">Ghế trống</label>
+                <img src="{{asset('public/frontend/img/empty-seat.png')}}" class="empty-seat-map" id="empty-seat-map">
             </div>  
             </div>
                     
@@ -118,9 +118,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Number of Seats</th>
-                        <th>Seats</th>
+                        <th>Tên</th>
+                        <th>Số lượng: </th>
+                        <th>Vị trí ghế:</th>
+                        <th>Tổng tiền:</th>
                     </tr>
                 </thead>
                 <tbody id="ticket-sold-info">
@@ -131,13 +132,15 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <input type="hidden" name="fullname" value ="<%-item.names%>">
                                 <td><%-item.numbers%></td>
                                 <td><%-item.seats%></td>
+                               
                             </tr>
                         <%})%>
                     </script>
                 </tbody>
 
             </table>  
-            <input class="btn btn-default btn-register" type="submit" value="Đăng ký" name="commit">
+            <div class="container" style="text-align: center;"> <input class="btn btn-info" type="submit" value="Đặt vé" name="commit" >   </div>
+           
             </form>
 
         </div>
@@ -178,13 +181,13 @@ var InitialView = Backbone.View.extend({
         if(reservedseats!=null)
             availableSeats=TotalSeats-reservedseats.length;
         if(!$('#name').val()){
-            $(".error").html("Name is required");
+            $(".error").html("Không được để trống");
         }
         else if(!selectedNumberOfSeats){
-            $(".error").html("Number of seats is required");
+            $(".error").html("Không được để trống");
         }
         else if(parseInt(selectedNumberOfSeats)>availableSeats){
-            $(".error").html("You can only select "+availableSeats+" seats")
+            $(".error").html("Bạn chỉ có thể chọn "+availableSeats+" vị trí")
         }
         else
         {
@@ -246,7 +249,7 @@ var ScreenUI=Backbone.View.extend({
             window.location.reload();
         }
         else{
-            $(".error").html("Please select exactly "+ $('#seats').val()+" seats");
+            $(".error").html("Vui lòng chọn đúng "+ $('#seats').val()+" ghế");
         }       
     },
 });

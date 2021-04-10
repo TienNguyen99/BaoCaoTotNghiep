@@ -29,7 +29,9 @@
     <link rel="stylesheet" href="{{asset('public/frontend/css/style.css')}}" type="text/css">
     <link rel="stylesheet" href="{{asset('public/frontend/css/login-register.css')}}" type="text/css">
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.css">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/6.6.9/sweetalert2.min.js"></script>
+  @yield('scripts')
     <!-- <link href="{{asset('public/frontend/css/stylebooking.css')}}" rel="stylesheet" type="text/css" media="all" /> -->
 
 </head>
@@ -54,15 +56,15 @@
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li class="active"><a href="{{URL::to('/trang-chu')}}">Mua vé</a></li>
-                                <li><a href="#">Điện ảnh <span class="arrow_carrot-down"></span></a>
+                                <li><a href="javascript:void(0)">Điện ảnh <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
-                                        <li><a href="#">Thể loại</a></li>
-                                        <li><a href="#">Diễn viên</a></li>
-                                        <li><a href="#">Đạo diễn</a></li>
-                                        <li><a href="#">Rạp chiếu phim</a></li>
+                                        <li><a href="{{URL::to('/404')}}">Thể loại</a></li>
+                                        <li><a href="{{URL::to('/404')}}">Diễn viên</a></li>
+                                        <li><a href="{{URL::to('/404')}}">Đạo diễn</a></li>
+                                        <li><a href="{{URL::to('/404')}}">Rạp chiếu phim</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#" id ="locationModal">Rạp phim</a></li>
+                                <li><a href="javascript:void(0)" id ="locationModal">Rạp phim</a></li>
                                 
                                 
                             </ul>
@@ -75,7 +77,7 @@
                         <?php if (Auth::guard('customers')->check()): ?>
                             <nav class="header__menu mobile-menu">
 
-                                <ul> <a href="#" class="search-switch"><span class="icon_search" style="color: #b7b7b7; display:block;font-weight: 700;"></span></a>   <li><a href="" >Chào bạn,{{Auth::guard('customers')->user()->customer_name}}  <span class="arrow_carrot-down"></span></a>
+                                <ul> <a href="javascript:void(0)" class="search-switch"><span class="icon_search" style="color: #b7b7b7; display:block;font-weight: 700;"></span></a>   <li><a href="" >Chào bạn,{{Auth::guard('customers')->user()->customer_name}}  <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="{{route('custom.profile')}}" >Thông tin tài khoản</a></li>
                                         <li><a href= "{{route('custom.logout')}}">Đăng xuất</a></li>
@@ -85,9 +87,9 @@
                         
                             </nav>
                         <?php else: ?>
-                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                        <a href="javascript:void(0)" class="search-switch"><span class="icon_search"></span></a>
 
-                        <a href="javascript:;"><span class="icon_profile" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();"></span></a>  
+                        <a href="javascript:void(0)"><span class="icon_profile" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();"></span></a>  
                         <?php endif ?>
                         
 
@@ -108,7 +110,7 @@
 
                 <?php foreach ($sliders as $key => $slider): ?>
                 <div class="hero__items " style="background-image: url('{{Voyager::Image($slider->slider_image)}}'); background-repeat: no-repeat;
-  background-size: cover;
+  background-size: 100% 100%;
   background-position: top center;">
                     
                     <div class="row">
@@ -117,7 +119,7 @@
 
                                 <h2>&nbsp;</h2>
                                 <p>&nbsp;</p>
-                                <a href="#"><span>Xem chi tiết</span> <i class="fa fa-angle-right"></i></a>
+                                <a href="{{URL::to('/404')}}"><span>Xem chi tiết</span> <i class="fa fa-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -155,8 +157,12 @@
                             
                                 <div class="filter__gallery">
                                     <?php foreach ($phimhots as $key => $phimhot): ?>
-                                    <div class="product__sidebar__view__item  mix {{$phimhot->film_hotby}} " >
-                                        <img src="{{Voyager::Image($phimhot->picture)}}" width="100%" height="100%">
+                                    <div class="product__sidebar__view__item  mix {{$phimhot->film_hotby}} " style="
+                background-image: url('{{Voyager::Image($phimhot->picture)}}'); 
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                background-position: top center;">
+                                        
                                         <div class="ep">{{$phimhot->rate}}</div>
                                         <div class="view"><i class="fa fa-eye"></i> </div>
                                         <h5><a href="{{URL::to('/detail/'.$phimhot->filid)}}">{{$phimhot->namef}}</a></h5>
@@ -199,7 +205,7 @@
 <!-- Footer Section Begin -->
 <footer class="footer">
     <div class="page-up">
-        <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
+        <a href="javascript:void(0)" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
     </div>
     <div class="container">
         <div class="row">
@@ -212,9 +218,9 @@
                 <div class="footer__nav">
                     <ul>
                         <li class="active"><a href="{{URL::to('/trang-chu')}}">TRANG CHỦ</a></li>
-                        <li><a href="#">DANH SÁCH PHIM</a></li>
-                        <li><a href="#">BLOG</a></li>
-                        <li><a href="#">LIÊN HỆ</a></li>
+                        <li><a href="{{URL::to('/tat-ca-phim')}}">DANH SÁCH PHIM</a></li>
+                        <li><a href="javascript:void(0)">BLOG</a></li>
+                        <li><a href="javascript:void(0)">LIÊN HỆ</a></li>
                     </ul>
                 </div>
             </div>
@@ -252,13 +258,11 @@
                         <div class="box">
                              <div class="content">
                                 <div class="social">
-                                    <a class="circle github" href="#">
-                                        <i class="fa fa-github fa-fw"></i>
-                                    </a>
-                                    <a id="google_login" class="circle google" href="#">
+                                    
+                                    <a id="google_login" class="circle google" href="javascript:void(0)">
                                         <i class="fa fa-google-plus fa-fw"></i>
                                     </a>
-                                    <a id="facebook_login" class="circle facebook" href="#">
+                                    <a id="facebook_login" class="circle facebook" href="javascript:void(0)">
                                         <i class="fa fa-facebook fa-fw"></i>
                                     </a>
                                 </div>
@@ -336,6 +340,7 @@
 
 <!-- End login/register Modal-->
 <!-- Js Plugins -->
+
 <script src="{{asset('public/frontend/js/jquery-3.3.1.min.js')}}"></script>
 <script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('public/frontend/js/player.js')}}"></script>
@@ -345,6 +350,7 @@
 <script src="{{asset('public/frontend/js/owl.carousel.min.js')}}"></script>
 <script src="{{asset('public/frontend/js/main.js')}}"></script>
 <script src="{{asset('public/frontend/js/login-register.js')}}"></script>
+
 
 <!-- Location Cinema Modal -->    
 <script type="text/javascript">
@@ -371,7 +377,7 @@ $( "#locationModal" ).click(function() {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
         js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));</script>
 

@@ -25,7 +25,7 @@
                 <div class="product__item__pic" style="
                 background-image: url('{{Voyager::Image($phim->picture)}}'); 
                 background-repeat: no-repeat;
-                background-size: cover;
+                background-size: 100% 100%;
                 background-position: top center;">
                     <div class="ep">Đánh giá {{$phim->rate}} / 10</div>
                     <div class="comment"><i class="fa fa-comments"></i> 11</div>

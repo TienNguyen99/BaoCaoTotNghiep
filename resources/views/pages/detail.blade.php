@@ -1,4 +1,21 @@
 @extends('layout')
+@section('scripts')
+<script type="text/javascript">
+    function preload() {
+  Swal.fire({
+    title: "Checking...",
+    text: "Please wait",
+    imageUrl: "https://www.epgdlaw.com/wp-content/uploads/2017/09/ajax-loader.gif",
+    showConfirmButton: false,
+    allowOutsideClick: false
+  });
+} 
+
+// To close, just call Swal.close()
+setTimeout(() => Swal.close(), 5000);
+</script>
+
+@endsection
 @section('content')
 
     <div id="preloder">
@@ -71,8 +88,9 @@
                             </div>
                             <div class="anime__details__btn">
                                 <a href="#trailerModal" class="follow-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/Jfrjeg26Cwk" ><i class="fa fa-heart-o"></i> Trailer</a>
-                                <a href="#" class="watch-btn" data-toggle="modal" data-target="#bookingModal"><span>Đặt vé</span> <i
-                                    class="fa fa-angle-right"></i></a>
+                                <a href="#" class="watch-btn" data-toggle="modal" data-target="#bookingModal" ><span>Đặt vé</span> 
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
                                 </div>
                             </div>
                         </div>
@@ -132,21 +150,33 @@
         <div class="modal-content">
             <div class="bg-white p-2 px-3 border-bottom">
                 <div class="row">
-                    <div class="col-md-12">
+                    
                         <div class="d-flex justify-content-between align-items-center">   
-                                <button class="d-flex flex-row align-items-center">
-                                    <h2 class="date-o">24</h2>
-                                    <div class="d-flex flex-column ml-2 date"> <span>July 20</span> <span>Friday</span> </div>
+                                <button class="d-flex flex-row align-items-center" onclick="preload()">
+                                    <h2 class="date-o">3</h2>
+                                    <div class="d-flex flex-column ml-2 date"> <span>August</span> <span>Saturday</span> </div>
                                 </button>
+                                <button class="d-flex flex-row align-items-center" onclick="preload()">
+                                    <h2 class="date-o">4</h2>
+                                    <div class="d-flex flex-column ml-2 date"> <span>August</span> <span>Sunday</span> </div>
+                                </button>
+
                         </div>
-                    </div>
+
+                    
                     
                 </div>
+
             </div>
             <div class="complete p-3 mt-2">
                 
-                <div class="text-center mt-4 mb-4"> <button class="btn btn-danger booking">Complete Booking</button> </div>
+            <form action="{{URL::to('/test/'.$value->filid)}}" method="get">
+                
+                
+                <div class="text-center mt-4 mb-4"> <button class="btn btn-danger booking" type="submit"> Tiếp tục</button> </div>
             </div>
+            </form>
+            
         </div>
     </div>
 </div>
@@ -184,26 +214,7 @@
 <!--End Booking modal -->  
   
   <!--Script Trailer Modal -->
-<script type="text/javascript">
-    $(document).ready(function() {
-// Gets the video src from the data-src on each button
-var $videoSrc;  
-$('.video-btn').click(function() {
-    $videoSrc = $(this).data( "src" );
-});
-console.log($videoSrc);
-// when the modal is opened autoplay it  
-$('#trailerModal').on('shown.bs.modal', function (e) {  
-// set the video src to autoplay and not to show related video. Youtube related video is like a box of chocolates... you never know what you're gonna get
-$("#video").attr('src',$videoSrc + "?autoplay=1&amp;modestbranding=1&amp;showinfo=0" ); 
-})
-// stop playing the youtube video when I close the modal
-$('#trailerModal').on('hide.bs.modal', function (e) {
-    // a poor man's stop video
-    $("#video").attr('src',$videoSrc); 
-}) 
-});
-</script>
+
  <!-- End Script Traler -->
 
 

@@ -26,7 +26,7 @@
                 <div class="product__item__pic" style="
                 background-image: url('{{Voyager::Image($phim->picture)}}'); 
                 background-repeat: no-repeat;
-                background-size: cover;
+                background-size: 100% 100%;
                 background-position: top center;">
                     <div class="ep">Đánh giá {{$phim->rate}} / 5</div>
                     <div class="comment"><i class="fa fa-comments"></i> </div>
@@ -59,7 +59,7 @@
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4">
             <div class="btn__all">
-                <a href="#" class="primary-btn">Xem tất cả <span class="arrow_right"></span></a>
+                <a href="{{URL::to('/tat-ca-phim')}}" class="primary-btn">Xem tất cả <span class="arrow_right"></span></a>
             </div>
         </div>
     </div>
@@ -70,7 +70,7 @@
                 <div class="product__item__pic" style="
                 background-image: url('{{Voyager::Image($phimup->picture)}}'); 
                 background-repeat: no-repeat;
-                background-size: cover;
+                background-size: 100% 100%;
                 background-position: top center;">
                     <div class="ep">Đánh giá {{$phimup->rate}} / 5</div>
                     <div class="comment"><i class="fa fa-comments"></i> 11</div>

@@ -93,6 +93,9 @@ class HomeController extends Controller
 
     	return view('pages.home')->with(compact("Phims"))->with(compact('sliders'))->with(compact('Phimsupcoming'))->with(compact('phimhots'));
     }
+    public function notfound(){
+        return view('pages.404');
+    }
     public function seeall(){
         $phimhots = DB::table('film')
 
@@ -130,7 +133,7 @@ class HomeController extends Controller
             $customer ->save();
                 
             
-            return redirect()->back()->with('success','Đăng ký thành công.');
+            return redirect()->back()->with('success','Đặt vé thành công.');
     }
 
         public function postDangky(Request $req){

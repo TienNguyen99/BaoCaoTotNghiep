@@ -44,27 +44,27 @@
     <header class="header">
         <div class="container">
             <div class="row">
-<!--                 <div class="col-lg-2">
+                <div class="col-lg-2">
                     <div class="header__logo">
-                        <a href="./index.html">
-                            <img src="{{'img/logo.png'}}" alt="">
+                        <a href="{{URL::to('/trang-chu')}}">
+                            <img src="{{asset('public/storage/logo.jpg')}}" alt="">
                         </a>
                     </div>
-                </div> -->
-                <div class="col-lg-8">
+                </div>
+                <div class="col-lg-6">
                     <div class="header__nav">
                         <nav class="header__menu mobile-menu">
                             <ul>
                                 <li class="active"><a href="{{URL::to('/trang-chu')}}">Mua vé</a></li>
-                                <li><a href="#">Điện ảnh <span class="arrow_carrot-down"></span></a>
+                                <li><a href="javascript:void(0)">Điện ảnh <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
-                                        <li><a href="#">Thể loại</a></li>
-                                        <li><a href="#">Diễn viên</a></li>
-                                        <li><a href="#">Đạo diễn</a></li>
-                                        <li><a href="#">Rạp chiếu phim</a></li>
+                                        <li><a href="{{URL::to('/404')}}">Thể loại</a></li>
+                                        <li><a href="{{URL::to('/404')}}">Diễn viên</a></li>
+                                        <li><a href="{{URL::to('/404')}}">Đạo diễn</a></li>
+                                        <li><a href="{{URL::to('/404')}}">Rạp chiếu phim</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="#" id ="locationModal">Rạp phim</a></li>
+                                <li><a href="javascript:void(0)" id ="locationModal">Rạp phim</a></li>
                                 
                                 
                             </ul>
@@ -72,12 +72,12 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    <div class="header__right" style="padding: 5px">
+                    <div class="header__right" >
 
                         <?php if (Auth::guard('customers')->check()): ?>
                             <nav class="header__menu mobile-menu">
 
-                                <ul> <a href="#" class="search-switch"><span class="icon_search"></span></a>   <li><a href="" >Chào bạn,{{Auth::guard('customers')->user()->customer_name}}  <span class="arrow_carrot-down"></span></a>
+                                <ul> <a href="javascript:void(0)" class="search-switch"><span class="icon_search" style="color: #b7b7b7; display:block;font-weight: 700;"></span></a>   <li><a href="" >Chào bạn,{{Auth::guard('customers')->user()->customer_name}}  <span class="arrow_carrot-down"></span></a>
                                     <ul class="dropdown">
                                         <li><a href="{{route('custom.profile')}}" >Thông tin tài khoản</a></li>
                                         <li><a href= "{{route('custom.logout')}}">Đăng xuất</a></li>
@@ -87,9 +87,9 @@
                         
                             </nav>
                         <?php else: ?>
-                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
+                        <a href="javascript:void(0)" class="search-switch"><span class="icon_search"></span></a>
 
-                        <a href="javascript:;"><span class="icon_profile" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();"></span></a>  
+                        <a href="javascript:void(0)"><span class="icon_profile" data-toggle="modal" href="javascript:void(0)" onclick="openLoginModal();"></span></a>  
                         <?php endif ?>
                         
 

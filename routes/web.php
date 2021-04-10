@@ -22,7 +22,8 @@ Route::get('/trang-chu','HomeController@index')->name('index');
 
 //Xem tat ca phim
 Route::get('/tat-ca-phim','HomeController@seeall')->name('seeall');
-
+// 404 page
+Route::get('/404','HomeController@notfound');
 //Dang ky, dang nhap ,dang xuat
 Route::post('/register','HomeController@postDangky')->name('custom.register');
 Route::post('/login','HomeController@postDangnhap')->name('custom.login');
