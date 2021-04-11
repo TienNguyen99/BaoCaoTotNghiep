@@ -115,14 +115,14 @@ class HomeController extends Controller
     }
     public function test($filid){
         $chitiet_films = DB::table('film')
-        ->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
-        ->join('Feedback', 'film.status','=','Feedback.status')
-        ->join('Showtime', 'film.filid','=','Showtime.showtime_id')
         ->limit(1)
         ->orWhere('film.filid',$filid)
-        ->groupBy('filid','film_idF')
         ->get();
-        return view('pages.test')->with(compact('chitiet_films'));
+        $showtimes = DB::table('showtime')
+        ->join('Film', 'showtime.showtime_film_id', '=', 'film.filid')
+        ->orWhere('film.filid',$filid)
+        ->get();
+        return view('pages.test')->with(compact('chitiet_films'))->with(compact('showtimes'));
     }
 
     public function dangkytest(Request $req){

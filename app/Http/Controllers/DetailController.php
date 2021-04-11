@@ -32,6 +32,7 @@ class DetailController extends Controller
 		->groupBy('filid','film_idF')
 		->where('film.filid',$filid)
 		->get();
+        
 		$feedbacks = DB::table('film')
 		->join('Typefilm', 'film.film_idtype', '=', 'Typefilm.typid')
 		->join('Feedback', 'film.filid','=','Feedback.film_idF')

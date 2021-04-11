@@ -28,7 +28,7 @@ setTimeout(() => Swal.close(), 5000);
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
                         <a href="{{URL::to('/trang-chu')}}"><i class="fa fa-home"></i>Mua vé</a>
-                        <a href="#">Categories</a>
+                        <a href="#">Thể loại</a>
                         <span>{{$value->namet}}</span>
                     </div>
                 </div>
@@ -88,7 +88,8 @@ setTimeout(() => Swal.close(), 5000);
                             </div>
                             <div class="anime__details__btn">
                                 <a href="#trailerModal" class="follow-btn" data-toggle="modal" data-src="https://www.youtube.com/embed/Jfrjeg26Cwk" ><i class="fa fa-heart-o"></i> Trailer</a>
-                                <a href="#" class="watch-btn" data-toggle="modal" data-target="#bookingModal" ><span>Đặt vé</span> 
+
+                                <a href="{{URL::to('/test/'.$value->filid)}}" class="watch-btn" " ><span>Đặt vé</span> 
                                     <i class="fa fa-angle-right"></i>
                                 </a>
                                 </div>
@@ -145,7 +146,7 @@ setTimeout(() => Swal.close(), 5000);
         </section>
         <!-- Anime Section End -->
 <!-- Modal -->
-<div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-top: 25%">
+<!-- <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-top: 25%">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="bg-white p-2 px-3 border-bottom">
@@ -179,7 +180,7 @@ setTimeout(() => Swal.close(), 5000);
             
         </div>
     </div>
-</div>
+</div> -->
 <!-- End booking modal-->
 <div class="modal fade" id="trailerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="padding-top: 25%">
   <div class="modal-dialog" role="document" style="      max-width: 800px;margin: 30px auto;">
