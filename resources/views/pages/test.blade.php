@@ -146,8 +146,8 @@
 
                     <div class="col-12 ">
                         <?php foreach ($showtimes as $key => $showtime): ?>
-                        <input class="checkbox-budget" type="radio" name="namedate" id="{{$showtime->showtime_id}}" value="{{ \Carbon\Carbon::parse($showtime->showtime_date)->format('d/m')}}" checked>
-                        <label class="for-checkbox-budget" for="{{$showtime->showtime_id}}">
+                        <input class="checkbox-budget" type="radio" name="namedate" id="showdate_{{$showtime->showtime_id}}" value="{{ \Carbon\Carbon::parse($showtime->showtime_date)->format('d/m')}}" checked>
+                        <label class="for-checkbox-budget" for="showdate_{{$showtime->showtime_id}}">
                             <span data-hover="{{ \Carbon\Carbon::parse($showtime->showtime_date)->format('d/m')}}">{{ \Carbon\Carbon::parse($showtime->showtime_date)->format('d/m')}}</span>
                         </label>
                         
@@ -159,18 +159,17 @@
     </fieldset>
     <fieldset>
             <div class="col-12 ">
-                <?php foreach ($showtimes as $key => $time): ?>
-                        <input class="checkbox-tools" type="radio" name="tools" id="{{ \Carbon\Carbon::parse($time->showtime_hour)->format('H:i')}}" checked>
-                        <label class="for-checkbox-tools" for="{{ \Carbon\Carbon::parse($time->showtime_hour)->format('H:i')}}">
+
+                        <?php foreach ($showtimes as $key => $time): ?>
+                        <input class="checkbox-budget" type="radio" name="nametime" id="showtime_{{$time->showtime_id}}" value="{{ \Carbon\Carbon::parse($time->showtime_hour)->format('H:i')}}" checked>
+                        <label class="for-checkbox-budget" for="showtime_{{$time->showtime_id}}">
                             <span data-hover="{{ \Carbon\Carbon::parse($time->showtime_hour)->format('H:i')}}">{{ \Carbon\Carbon::parse($time->showtime_hour)->format('H:i')}}</span>
-                            
                         </label>
-
-                <?php endforeach ?>
-
+                        
+                         <?php endforeach ?>  
             </div>
         <input type="button" name="previous" class="previous action-button" value="Trở về" />
-        <input type="button" name="next" class="next action-button" value="Tiếp tục" />
+        <input type="button" name="next" class="next action-button" value="Tiếp tục" onclick="displayTimeValue()" />
     </fieldset>
     <fieldset>
 <div class="col-12">
@@ -265,8 +264,10 @@
                 <thead>
                     <tr>
                         <th>Khách hàng</th>
+                        <th><input type="text" value ="" ></th>
                         <th>Phim</th>
-                        <th>Suất chiếu</th>
+                        <th>Ngày chiếu</th>
+                        <th>Giờ chiếu</th>
                         <th>Số vé</th>
                         <th>Vị trí ghế</th>
                         <th>Tổng tiền</th>
@@ -278,11 +279,19 @@
                             <tr>
                                 <td><%-item.names%></td>
                                 <input type="hidden" name="fullname" value ="<%-item.names%>">
+
                                 <td>{{$value->namef}}</td>
                                 <input type="hidden" name="namefilm" value ="{{$value->namef}}">
+
                                 <td id="result"></td>
+                                
+
+                                <td id="timeresult"></td>
+
                                 <td id="getValue"><%-item.numbers%></td>
+
                                 <td><%-item.seats%></td>
+
                                 <td id="showValue"></td>
                             </tr>
                         <%})%>
@@ -375,7 +384,7 @@ var ScreenUI=Backbone.View.extend({
         var bookedSeats=convertIntToSeatNumbers(BookedSeats);
         $("#ticket-sold-info").append("<tr><td>"+$('#name').val()+"</td><td>"+$('#seats').val()+"</td><td>"+bookedSeats+"</td></tr>");
     },
-    bookTickets:function(){
+    bookTickets:function(event){
         
             
             var reservedseats=JSON.parse(localStorage.getItem('ReservedSeats'))||[];
@@ -387,7 +396,9 @@ var ScreenUI=Backbone.View.extend({
             localStorage.setItem('NameSeatsJSON',JSON.stringify(nameSeatsJSON));
             localStorage.setItem('ReservedSeats',JSON.stringify(reservedseats));
             this.updateTicketInfo();
-            window.location.reload();
+            location.reload(true);
+            
+
             swal("Chọn ghế thành công .Vui lòng nhấn tiếp tục để xem thông tin vé.")
         
               
@@ -415,7 +426,7 @@ var TicketInfo=Backbone.View.extend({
 var ticketInfo=new TicketInfo({el:$('.table-responsive')});
 </script>
 <!-- jQuery easing plugin -->
-<script src="http://thecodeplayer.com/uploads/js/jquery.easing.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" type="text/javascript"></script>
 <script type="text/javascript">
         function displayRadioValue() {
             var ele = document.getElementsByName('namedate');
@@ -424,6 +435,18 @@ var ticketInfo=new TicketInfo({el:$('.table-responsive')});
                 if(ele[i].checked)
                 document.getElementById("result").innerHTML
                         = ele[i].value;
+            }
+        }
+</script>
+<script type="text/javascript">
+        function displayTimeValue() {
+            var time = document.getElementsByName('nametime');
+          
+            for(i = 0; i < time.length; i++) {
+                if(time[i].checked)
+                document.getElementById("timeresult").innerHTML
+                        =time[i].value;
+                  
             }
         }
 </script>
