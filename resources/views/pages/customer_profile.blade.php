@@ -61,7 +61,7 @@
 					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
 						<div class="form-group">
 							<label for="Street">Phim</label>
-							<input type="name" class="form-control" id="Street" readonly="">
+							<input type="name" class="form-control" id="Street" readonly="" value="{{Auth::guard('customers')->user()->custom_film}}">
 						</div>
 					</div>
 					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -76,12 +76,7 @@
 							<input type="text" class="form-control" id="sTate" readonly="">
 						</div>
 					</div>
-					<div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12" >
-						<div class="form-group">
-							<label for="zIp"></label>
-							<input type="text" class="form-control" id="zIp" >
-						</div>
-					</div>
+					
 				</div>
 
 			</div>
