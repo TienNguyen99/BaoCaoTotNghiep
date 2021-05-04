@@ -37,8 +37,10 @@ Route::post('/post-comment','DetailController@postComment')->name('custom.commen
 //Profile Customer
 Route::get('/profile','ProfileController@index')->name('custom.profile');
 //Test post dat ve
-Route::post('/test/booking','HomeController@dangkytest')->name('custom.booking');
-
+Route::post('/test/booking','BookingController@dangkytest')->name('custom.booking');
+//Gui mail
+Route::get('/sendmail','BookingController@sendMail');
+//Admin backend
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });

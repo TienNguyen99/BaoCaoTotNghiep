@@ -264,7 +264,6 @@
                 <thead>
                     <tr>
                         <th>Khách hàng</th>
-                        <th><input type="text" value ="" ></th>
                         <th>Phim</th>
                         <th>Ngày chiếu</th>
                         <th>Giờ chiếu</th>
@@ -277,11 +276,15 @@
                     <script type="text/template" id='table-ticket-info'>
                         <% _.each(items,function(item){%>
                             <tr>
+                                <input type="hidden" name="cus_id" value = "{{Auth::guard('customers')->user()->customer_id}}">
+                                <input type="hidden" name="cus_phone" value = "{{Auth::guard('customers')->user()->customer_phone}}">
+                                <input type="hidden" name="cus_address" value = "{{Auth::guard('customers')->user()->customer_address}}">
+                                <input type="hidden" name="cus_birth" value = "{{Auth::guard('customers')->user()->customer_birth}}">
                                 <td><%-item.names%></td>
-                                <input type="hidden" name="fullname" value ="<%-item.names%>">
+                                <input type="hidden" name="cus_name" value ="<%-item.names%>">
 
                                 <td>{{$value->namef}}</td>
-                                <input type="hidden" name="namefilm" value ="{{$value->namef}}">
+                                <input type="hidden" name="cus_film" value ="{{$value->namef}}">
 
                                 <td id="result"></td>
                                 
@@ -291,7 +294,7 @@
                                 <td id="getValue"><%-item.numbers%></td>
 
                                 <td><%-item.seats%></td>
-
+                                <input type="hidden" name="cus_seat" value ="<%-item.seats%>">
                                 <td id="showValue"></td>
                             </tr>
                         <%})%>
