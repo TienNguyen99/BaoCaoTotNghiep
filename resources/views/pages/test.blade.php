@@ -310,6 +310,10 @@
         </div>
         <input type="button" name="previous" class="previous action-button" value="Trở về" />
         <input class="action-button"  type="submit" value="Đặt vé"  >
+
+        <div class="col-12" id="paypal-button"></div>
+
+       
         <!-- <input type="submit" name="submit" class="submit action-button" value="Xác nhận đặt vé" id="form-submit" /> -->
   </fieldset>
 
@@ -463,7 +467,58 @@ var ticketInfo=new TicketInfo({el:$('.table-responsive')});
             
         }
 </script>
+ <script src="https://www.paypalobjects.com/api/checkout.js"></script>
+<script>
+            var socu = parseInt(document.getElementById("getValue").textContent);
+            
+            var somoi  = 50.000;
 
+            var total = (socu* somoi) / 20;
+  paypal.Button.render({
+    // Configure environment
+    env: 'sandbox',
+    client: {
+      sandbox: 'demo_sandbox_client_id',
+      production: 'demo_production_client_id'
+    },
+    // Customize button (optional)
+    locale: 'en_US',
+    style: {
+      size: 'medium',
+      color: 'silver',
+      shape: 'pill',
+      tagline: 'false',
+    },
+
+    // Enable Pay Now checkout flow (optional)
+    commit: true,
+
+    // Set up a payment
+    payment: function(data, actions) {
+      return actions.payment.create({
+        transactions: [{
+          amount: {
+            total: `${total}`,
+            currency: 'USD'
+          }
+        }]
+      });
+    },
+    // Execute the payment
+    onAuthorize: function(data, actions) {
+      return actions.payment.execute().then(function() {
+        // Show a confirmation message to the buyer
+        swal({
+  title: "Đặt vé thành công!",
+  text: "Vui lòng đến quầy nhận vé sau 24 giờ!",
+  type: "success",
+});
+        
+      });
+    }
+  }, '#paypal-button');
+
+</script>
 
 
 
