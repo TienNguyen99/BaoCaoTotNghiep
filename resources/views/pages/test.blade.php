@@ -309,7 +309,7 @@
 
         </div>
         <input type="button" name="previous" class="previous action-button" value="Trở về" />
-        <input class="action-button"  type="submit" value="Đặt vé"  >
+        <input class="action-button"  type="submit" value="Hoàn tất"  >
 
         <div class="col-12" id="paypal-button"></div>
 
@@ -511,6 +511,7 @@ var ticketInfo=new TicketInfo({el:$('.table-responsive')});
         swal({
   title: "Đặt vé thành công!",
   text: "Vui lòng đến quầy nhận vé sau 24 giờ!",
+  
   type: "success",
 });
         
